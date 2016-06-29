@@ -60,7 +60,7 @@ public class PuntoDeInteres {
 	
 	public boolean buscarCoincidencia(String x){
 		
-		return Utilitarios.buscarPalabraEnUnaLista(x, palabrasClaves) || tipo.coincidencia(x);
+		return Utilitarios.buscarPalabraEnUnaLista(x, palabrasClaves) || tipo.coincidencia(x)|| (nombre.indexOf(x) != -1);
 	}
 	
 }
