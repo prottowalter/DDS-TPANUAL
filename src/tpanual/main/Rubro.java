@@ -1,4 +1,4 @@
-package main.java;
+package tpanual.main;
 
 public abstract class Rubro {
 	Integer cercania;
