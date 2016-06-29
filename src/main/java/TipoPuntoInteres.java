@@ -1,3 +1,4 @@
+package main.java;
 
 public abstract class TipoPuntoInteres {
 	String horario;

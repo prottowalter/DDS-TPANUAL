@@ -1,6 +1,10 @@
+package main.java;
 
 public class ParadaColectivo extends TipoPuntoInteres {
-Integer cercania = 100;
+	
+	//Siempre un colectivo va a tener cercania 100
+	public static final int cercania = 100;
+	
 	public ParadaColectivo() {
 		// TODO Auto-generated constructor stub
 	}
@@ -9,13 +13,5 @@ Integer cercania = 100;
 		//super.setHorario("09:00 a 18:00");
 		super.getHorario();
 		}
-
-	public Integer getCercania() {
-		return cercania;
-	}
-
-	public void setCercania(Integer cercania) {
-		this.cercania = cercania;
-	}
 	
 	}

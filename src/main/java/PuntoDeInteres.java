@@ -1,9 +1,11 @@
+package main.java;
+
 
 import javax.swing.JOptionPane;
 
 public class PuntoDeInteres {
-	Double latitud;
-	Double longitud;
+	double latitud;
+	double longitud;
 	String nombre;
 	String direccion;
 	TipoPuntoInteres tipo;
@@ -78,7 +80,7 @@ public class PuntoDeInteres {
 		//System.out.println (punto1.getNombre());
 		//muestra por ventana
 		//JOptionPane.showMessageDialog(null, punto1.coordenadas());
-		JOptionPane.showMessageDialog(null, punto1.cercanoA(130,punto2));
+		//JOptionPane.showMessageDialog(null, punto1.cercanoA(130,punto2));
 		
 		//otro punto
 		PuntoDeInteres punto3 = new PuntoDeInteres();
@@ -100,15 +102,17 @@ public class PuntoDeInteres {
 		return this.latitud + "," + this.longitud;
 	}
 	
-	public Boolean sosValido() {
+	//Si usamos primitivas no es necesario validar, haces un constructor que reciba como parametro las coordenadas y sabes que siempre va a haber un valor, a lo sumo un 0
+	public boolean sosValido() {
 			
 		//if ((!this.latitud.isNaN()) && (!this.longitud.isNaN()) ) {
 		//}
-		return (this.nombre != null && this.latitud != null && this.longitud != null);
+		//return (this.nombre != null && this.latitud != null && this.longitud != null);
 		//return ((!this.latitud.isNaN()) && (!this.longitud.isNaN()) && this.nombre != null);//(!this.nombre.isEmpty()));
+		return true;
 	}
 
-	public Boolean cercanoA(Integer metros,PuntoDeInteres otroPoi){
+	public Boolean cercanoA(int metros,PuntoDeInteres otroPoi){
 		Mapa map1 = new Mapa();
 		//Double distancia;
 		return metros >= (int) (map1.distance(this.getLatitud(),this.getLongitud(),otroPoi.getLatitud(),otroPoi.getLongitud(),"K") * 1000);

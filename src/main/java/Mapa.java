@@ -1,6 +1,5 @@
-//import java.util.*;
-//import java.lang.*;
-//import java.io.*;
+package main.java;
+
 
 public class Mapa {
 

@@ -1,3 +1,4 @@
+package main.java;
 
 public class LocalComercial extends TipoPuntoInteres {
 Integer cercania;
