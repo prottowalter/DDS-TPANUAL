@@ -8,9 +8,17 @@ import java.util.List;
 
 public class Mapa {
 	
+	private static Mapa instance;
+	
 	private List<PuntoDeInteres> puntos;
 	
-	public Mapa() {
+	public static Mapa getInstance(){
+		if (instance==null)
+			instance=new Mapa();
+		return instance;
+	}
+	
+	private Mapa() {
 		// TODO Auto-generated constructor stub
 	}
 	
