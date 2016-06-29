@@ -47,15 +47,16 @@ public class Mapa {
 		return (rad * 180 / Math.PI);
 	}
 	
+	//sebas
 	public boolean esCercano(PuntoDeInteres punto, int latitud, int longitud, int comunaId){
 		return true;
 	}
-	
+	//marce
 	/*public boolean estaDisponible(Momento momento, String x){
 	 * return true;
 	}
 	*/
-	
+	//dani
 	public List<PuntoDeInteres> obtenerPuntosDeInteres(String x){
 		return null;
 	}
