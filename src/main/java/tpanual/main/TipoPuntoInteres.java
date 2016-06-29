@@ -11,6 +11,6 @@ public abstract class TipoPuntoInteres {
 		this.horario = horario;
 	}
 	
-	abstract public void tuHorario();
+	abstract public boolean estaDisponible();
 	abstract public int getRadioCercania();
 }

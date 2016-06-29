@@ -24,7 +24,7 @@ public class CGP extends TipoPuntoInteres{
 	}
 
 	@Override
-	public void tuHorario() {
-		
+	public boolean estaDisponible() {
+		return false;
 	}
 }

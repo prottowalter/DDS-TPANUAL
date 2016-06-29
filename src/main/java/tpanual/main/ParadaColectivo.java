@@ -14,9 +14,9 @@ public class ParadaColectivo extends TipoPuntoInteres {
 		this.linea=linea;
 	}
 
-	public void tuHorario () {
+	public boolean estaDisponible () {
 		//super.setHorario("09:00 a 18:00");
-		super.getHorario();
+		return true; //Una parada de colectivos siempre está dispnible
 	}
 	
 	public int getRadioCercania(){

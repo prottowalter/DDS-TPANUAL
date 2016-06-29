@@ -1,11 +1,12 @@
 package tpanual.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Mapa {
 	
-	private List<PuntoDeInteres> puntos;
+	private List<PuntoDeInteres> puntos = new ArrayList<PuntoDeInteres>();
 	
 	public Mapa() {
 		// TODO Auto-generated constructor stub
@@ -53,7 +54,7 @@ public class Mapa {
 		return true;
 	}
 	//marce
-	/*public boolean estaDisponible(Momento momento, String x){
+	/*public boolean estaDisponible(PuntoDeInteres, Momento momento, String x){
 	 * return true;
 	}
 	*/
