@@ -22,4 +22,9 @@ public class ParadaColectivo extends TipoPuntoInteres {
 	public int getRadioCercania(){
 		return 100;
 	}
+
+	@Override
+	public boolean coincidencia(String x) {
+		return linea.indexOf(x) != -1;
+	}
 }

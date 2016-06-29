@@ -15,6 +15,11 @@ public class SucursalBanco extends TipoPuntoInteres{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean coincidencia(String x) {
+		return false;
+	}
 	
 	
 }

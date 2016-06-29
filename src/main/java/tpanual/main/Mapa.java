@@ -1,6 +1,9 @@
 package tpanual.main;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
 
 
 public class Mapa {
@@ -57,9 +60,17 @@ public class Mapa {
 	 * return true;
 	}
 	*/
-	//dani
+	/**
+	 * Recibe un texto libre, busca en los puntos de interes almacenados en el mapa, aquellos que cumplan coincidencia con el texto y los devuelve.
+	 */
 	public List<PuntoDeInteres> obtenerPuntosDeInteres(String x){
-		return null;
+		List<PuntoDeInteres> listaADevolver=new ArrayList<PuntoDeInteres>();
+		Iterator<PuntoDeInteres> it=puntos.iterator();
+		while (it.hasNext()){
+			PuntoDeInteres punto=it.next();
+			if (punto.buscarCoincidencia(x)) listaADevolver.add(punto);
+		}
+		return listaADevolver;
 	}
 	
 }

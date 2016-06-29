@@ -16,5 +16,10 @@ public class LocalComercial extends TipoPuntoInteres {
 	public int getRadioCercania() {
 		return rubro.tuRadioDeCercania();
 	}
+
+	@Override
+	public boolean coincidencia(String x) {
+		return rubro.getNombre().indexOf(x)!=-1;
+	}
 	
 }
