@@ -1,8 +1,11 @@
 package tpanual.main;
 
+import java.util.List;
+
 
 public class Mapa {
-
+	
+	
 	public Mapa() {
 		// TODO Auto-generated constructor stub
 	}
@@ -43,5 +46,18 @@ public class Mapa {
 	private static double rad2deg(double rad) {
 		return (rad * 180 / Math.PI);
 	}
-
+	
+	public boolean esCercano(PuntoDeInteres punto, int latitud, int longitud, int comunaId){
+		return true;
+	}
+	
+	/*public boolean estaDisponible(Momento momento, String x){
+	 * return true;
+	}
+	*/
+	
+	public List<PuntoDeInteres> obtenerPuntosDeInteres(String x){
+		return null;
+	}
+	
 }
