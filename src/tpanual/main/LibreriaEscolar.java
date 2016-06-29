@@ -1,6 +1,6 @@
 package tpanual.main;
 
-public class LibreriaEscolar {
+public class LibreriaEscolar extends Rubro {
 	
 	public int tuRadioDeCercania() {
 		return 500;

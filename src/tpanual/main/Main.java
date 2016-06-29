@@ -41,7 +41,7 @@ public class Main {
 		
 		System.out.println (punto3.sosValido());
 		System.out.println (punto2.sosValido());
-		System.out.println (punto2.cercanoA(punto3.tipo.getCercania(), punto3));
+		System.out.println (punto2.cercanoA(punto3.tipo.getRadioCercania(), punto3));
 		
 	}
 }

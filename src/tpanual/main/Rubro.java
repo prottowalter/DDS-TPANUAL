@@ -1,15 +1,7 @@
 package tpanual.main;
 
 public abstract class Rubro {
-	Integer cercania;
-
-	public Integer getCercania() {
-		return cercania;
-	}
-
-	public void setCercania(Integer cercania) {
-		this.cercania = cercania;
-	}
+	protected String nombre;
 	
-	abstract public Integer tuRadioDeCercania();
+	abstract public int tuRadioDeCercania();
 }

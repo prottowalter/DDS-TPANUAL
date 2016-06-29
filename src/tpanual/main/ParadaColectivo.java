@@ -1,17 +1,25 @@
 package tpanual.main;
 
+import java.util.ArrayList;
+
 public class ParadaColectivo extends TipoPuntoInteres {
 	
-	//Siempre un colectivo va a tener cercania 100
-	public static final int cercania = 100;
+	private String linea;
 	
-	public ParadaColectivo() {
-		// TODO Auto-generated constructor stub
+	public String getLinea() {
+		return linea;
+	}
+
+	public ParadaColectivo(String linea) {
+		this.linea=linea;
 	}
 
 	public void tuHorario () {
 		//super.setHorario("09:00 a 18:00");
 		super.getHorario();
-		}
-	
 	}
+	
+	public int getRadioCercania(){
+		return 100;
+	}
+}

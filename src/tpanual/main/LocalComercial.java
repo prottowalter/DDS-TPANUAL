@@ -1,19 +1,20 @@
 package tpanual.main;
 
 public class LocalComercial extends TipoPuntoInteres {
-Integer cercania;
-//Rubro unRubro;
+
+	private Rubro rubro;
+	
+	public LocalComercial(Rubro rubro){
+		this.rubro=rubro;
+	}
+	
 	public void tuHorario () {
 		//super.setHorario("09:00 a 18:00");
 		super.getHorario();
 		}
 
-	public Integer getCercania() {
-		return cercania;
-	}
-
-	public void setCercania(Rubro unRubro) {
-		this.cercania = unRubro.tuRadioDeCercania();
+	public int getRadioCercania() {
+		return rubro.tuRadioDeCercania();
 	}
 	
 }
