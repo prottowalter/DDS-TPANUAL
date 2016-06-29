@@ -1,5 +1,7 @@
 package tpanual.main;
 
+import java.util.List;
+
 
 public class PuntoDeInteres {
 	double latitud;
@@ -7,6 +9,7 @@ public class PuntoDeInteres {
 	String nombre;
 	Direccion direccion;
 	TipoPuntoInteres tipo;
+	List<String> palabrasClaves;
 	
 	public PuntoDeInteres(double latitud, double longitud, String nombre, Direccion direccion, TipoPuntoInteres tipo) {
 		this.latitud=latitud;

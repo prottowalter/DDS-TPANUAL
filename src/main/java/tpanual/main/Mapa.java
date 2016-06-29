@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Mapa {
 	
+	private List<PuntoDeInteres> puntos;
 	
 	public Mapa() {
 		// TODO Auto-generated constructor stub

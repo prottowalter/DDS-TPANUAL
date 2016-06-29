@@ -12,22 +12,22 @@ import tpanual.main.Servicio;
 import tpanual.main.SucursalBanco;
 
 public class PuntoDeInteresFactory {
-	public PuntoDeInteres getGCP(double latitud, double longitud, String nombre, Direccion direccion, ArrayList<Servicio> servicios, int comunaId){
+	public static PuntoDeInteres getGCP(double latitud, double longitud, String nombre, Direccion direccion, ArrayList<Servicio> servicios, int comunaId){
 		CGP gcp=new CGP(servicios, comunaId);
 		PuntoDeInteres punto=new PuntoDeInteres(latitud, longitud, nombre, direccion, gcp);
 		return punto;
 	}
-	public PuntoDeInteres getLocalComercial(double latitud, double longitud, String nombre, Direccion direccion, Rubro rubro){
+	public static PuntoDeInteres getLocalComercial(double latitud, double longitud, String nombre, Direccion direccion, Rubro rubro){
 		LocalComercial l=new LocalComercial(rubro);
 		PuntoDeInteres punto=new PuntoDeInteres(latitud, longitud, nombre, direccion, l);
 		return punto;
 	}
-	public PuntoDeInteres getParadaDeColectivo(double latitud, double longitud, String nombre, Direccion direccion, String linea){
+	public static PuntoDeInteres getParadaDeColectivo(double latitud, double longitud, String nombre, Direccion direccion, String linea){
 		ParadaColectivo bondi=new ParadaColectivo(linea);
 		PuntoDeInteres punto=new PuntoDeInteres(latitud, longitud, nombre, direccion, bondi);
 		return punto;
 	}
-	public PuntoDeInteres getSucursal(double latitud, double longitud, String nombre, Direccion direccion){
+	public static PuntoDeInteres getSucursal(double latitud, double longitud, String nombre, Direccion direccion){
 		SucursalBanco sucursal=new SucursalBanco();
 		PuntoDeInteres punto=new PuntoDeInteres(latitud, longitud, nombre, direccion, sucursal);
 		return punto;
