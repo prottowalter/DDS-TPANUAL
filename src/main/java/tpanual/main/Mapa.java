@@ -19,9 +19,12 @@ public class Mapa {
 	}
 	
 	private Mapa() {
-		// TODO Auto-generated constructor stub
+		puntos=new ArrayList<PuntoDeInteres>();
 	}
 	
+	public void agregarPunto(PuntoDeInteres punto){
+		puntos.add(punto);
+	}
 	
 	//public static void main (String[] args) throws java.lang.Exception
 	//{
