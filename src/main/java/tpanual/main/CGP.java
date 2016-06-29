@@ -1,6 +1,7 @@
 package tpanual.main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CGP extends TipoPuntoInteres{
 	
@@ -26,5 +27,15 @@ public class CGP extends TipoPuntoInteres{
 	@Override
 	public boolean estaDisponible() {
 		return false;
+	}
+	
+	public boolean coincidencia(String x){
+		Iterator<Servicio> it=servicios.iterator();
+		boolean aparicion=false;
+		while (it.hasNext() && !aparicion){
+			if (it.next().getNombre().indexOf(x) != -1) 
+				aparicion=true;
+		}
+		return aparicion;
 	}
 }

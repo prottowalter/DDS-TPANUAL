@@ -1,5 +1,7 @@
 package tpanual.main;
 
+
+
 public abstract class TipoPuntoInteres {
 	String horario;
 
@@ -13,4 +15,5 @@ public abstract class TipoPuntoInteres {
 	
 	abstract public boolean estaDisponible();
 	abstract public int getRadioCercania();
+	public abstract boolean coincidencia(String x);
 }

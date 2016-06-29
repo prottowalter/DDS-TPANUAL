@@ -1,6 +1,8 @@
 package tpanual.main;
 
+import java.util.Iterator;
 import java.util.List;
+
 
 
 public class PuntoDeInteres {
@@ -11,12 +13,13 @@ public class PuntoDeInteres {
 	TipoPuntoInteres tipo;
 	List<String> palabrasClaves;
 	
-	public PuntoDeInteres(double latitud, double longitud, String nombre, Direccion direccion, TipoPuntoInteres tipo) {
+	public PuntoDeInteres(double latitud, double longitud, String nombre, Direccion direccion, List<String> palabrasClaves, TipoPuntoInteres tipo) {
 		this.latitud=latitud;
 		this.longitud=longitud;
 		this.nombre=nombre;
 		this.direccion=direccion;
 		this.tipo=tipo;
+		this.palabrasClaves=palabrasClaves;
 	}
 
 	public double getLatitud() {
@@ -55,6 +58,10 @@ public class PuntoDeInteres {
 		
 	}
 	
+	public boolean buscarCoincidencia(String x){
+		
+		return Utilitarios.buscarPalabraEnUnaLista(x, palabrasClaves) || tipo.coincidencia(x)|| (nombre.indexOf(x) != -1);
+	}
 	
 }
 
