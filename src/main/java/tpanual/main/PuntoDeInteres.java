@@ -1,6 +1,6 @@
 package tpanual.main;
 
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.List;
 
 
@@ -49,18 +49,16 @@ public class PuntoDeInteres {
 		return this.latitud + "," + this.longitud;
 	}
 	
-
-	public boolean cercanoA(int metros, PuntoDeInteres otroPoi){
-		Mapa map1 = new Mapa();
-		//Double distancia;
-		return metros >= (int) (map1.distance(this.getLatitud(),this.getLongitud(),otroPoi.getLatitud(),otroPoi.getLongitud(),"K") * 1000);
-	//	return true;
+	public boolean cercanoA(double unaLatitud, double unaLongitud, int comunaId){
 		
-	}
+		return this.tipo.cercanoEntre(this.latitud, this.longitud, unaLatitud, unaLongitud, comunaId);
+}
 	
+
 	public boolean buscarCoincidencia(String x){
 		
 		return Utilitarios.buscarPalabraEnUnaLista(x, palabrasClaves) || tipo.coincidencia(x)|| (nombre.indexOf(x) != -1);
+
 	}
 	
 }

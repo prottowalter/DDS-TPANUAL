@@ -16,4 +16,5 @@ public abstract class TipoPuntoInteres {
 	abstract public void tuHorario();
 	abstract public int getRadioCercania();
 	public abstract boolean coincidencia(String x);
+	public abstract boolean cercanoEntre(double latitudPunto,double longitudPunto,double latitudCoordenada,double longitudCoordenada, int comunaId);
 }

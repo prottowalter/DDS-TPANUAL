@@ -63,8 +63,10 @@ public class Mapa {
 	}
 	
 	//sebas
-	public boolean esCercano(PuntoDeInteres punto, int latitud, int longitud, int comunaId){
-		return true;
+	public boolean esCercano(PuntoDeInteres punto, double latitud, double longitud, int comunaId){
+		
+		return (punto.cercanoA(latitud,longitud,comunaId));
+
 	}
 	//marce
 	/*public boolean estaDisponible(Momento momento, String x){

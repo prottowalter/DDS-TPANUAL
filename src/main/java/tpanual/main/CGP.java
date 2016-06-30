@@ -38,4 +38,12 @@ public class CGP extends TipoPuntoInteres{
 		}
 		return aparicion;
 	}
+
+	@Override
+	public boolean cercanoEntre(double latitudPunto, double longitudPunto, double latitudCoordenada,
+			double longitudCoordenada, int comunaId) {
+		
+		return this.comunaId == comunaId;
+
+	}
 }
