@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tpanual.factory.PuntoDeInteresFactory;
+import tpanual.main.Carrousel;
 import tpanual.main.Dias;
 import tpanual.main.Direccion;
 import tpanual.main.HorarioDeAtencion;
@@ -208,6 +209,129 @@ public class MapaTest {
 	
 	//para libreria 
 	//assertFalse(mapa.esCercano(puntoFactory, -34.574647D, -58.485889D, 12));
+	
+	@Test
+	public void disponibilidadParadaColectivoTodoElDiaDomingoTest(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+		
+		PuntoDeInteres paradaDeColectivo = PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Parada de la linea ciento catorce", direccion, palabras, "114");
+		
+		for (int hora=0000;hora<2400;hora=hora+30)
+			assertTrue(mapa.estaDisponible(paradaDeColectivo, Dias.DOMINGO, hora, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadSucursalDeBancoDiaLunesALas1300Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+		
+		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras);
+		
+		assertTrue(mapa.estaDisponible(sucursalDeBanco, Dias.LUNES, 1300, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadSucursalDeBancoDiaViernesALas2200Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+		
+		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras);
+		
+		assertFalse(mapa.estaDisponible(sucursalDeBanco, Dias.SABADO, 2200, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadCarrouselDiaJuevesALas1730Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		Rubro rubroCarrousel = new Carrousel("Carrousel");
+		PuntoDeInteres carrousel = PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Calesita", direccion, palabras, rubroCarrousel);
+		
+		assertTrue(mapa.estaDisponible(carrousel, Dias.JUEVES, 1730, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadCarrouselDiaMartesALas1500Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		Rubro rubroCarrousel = new Carrousel("Carrousel");
+		PuntoDeInteres carrousel = PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Calesita", direccion, palabras, rubroCarrousel);
+		
+		assertFalse(mapa.estaDisponible(carrousel, Dias.MARTES, 1500, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadServicioDenunciasDiaMiercolesALas1100Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());		
+		
+		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
+		
+		assertTrue(mapa.estaDisponible(cgp, Dias.MARTES, 1100, "denuncias"));
+		
+	}
+	
+	@Test
+	public void disponibilidadDeAlgunServicioDiaLunesALas0900Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());		
+		
+		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
+		
+		assertTrue(mapa.estaDisponible(cgp, Dias.LUNES, 900, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadDeNingunServicioDiaDomingoALas0900Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());		
+		
+		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
+		
+		assertFalse(mapa.estaDisponible(cgp, Dias.DOMINGO, 900, ""));
+		
+	}
+	
 	/**
 	 * Este metodo deberia ser usado por los demas test para que este centralizado la creacion del Mapa con puntos adentro
 	 * @return

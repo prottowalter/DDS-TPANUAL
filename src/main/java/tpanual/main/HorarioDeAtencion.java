@@ -61,7 +61,7 @@ public class HorarioDeAtencion {
 	
 	public boolean estaEnRangoHorario (List<int[]> dia, int hora){
 		for (int[] horas:dia){
-			if (horas[0]<hora&&hora<horas[1])
+			if (horas[0]<=hora&&hora<horas[1])
 				return true;
 		}
 		return false;
