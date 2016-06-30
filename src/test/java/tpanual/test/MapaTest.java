@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import tpanual.factory.PuntoDeInteresFactory;
 import tpanual.main.Direccion;
+import tpanual.main.Kiosko;
 import tpanual.main.LibreriaEscolar;
 import tpanual.main.Mapa;
 import tpanual.main.PuntoDeInteres;
@@ -93,6 +94,22 @@ public class MapaTest {
 		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
 		
 	}
+	
+	@Test
+	public void testKioskoCercano(){
+		Mapa mapa = Mapa.getInstance();
+		//Creo la dirección
+		Direccion direccionDelKiosko = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5389").crearDireccion();
+		ArrayList<String> palabrasClave = new ArrayList<String>();
+		palabrasClave.add("Venden alcohol");
+		palabrasClave.add("Venden Panchos");
+		Rubro rubro = new Kiosko();
+		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.573119D, -58.489301D, "Lo + Pancho", direccionDelKiosko, palabrasClave, rubro);
+		
+		assertTrue(mapa.esCercano(puntoFactory, -34.573001D, -58.490937D, 12));
+		
+	}
+	
 	
 	//para libreria 
 	//assertFalse(mapa.esCercano(puntoFactory, -34.574647D, -58.485889D, 12));
