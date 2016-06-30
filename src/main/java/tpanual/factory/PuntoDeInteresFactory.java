@@ -13,7 +13,7 @@ import tpanual.main.Servicio;
 import tpanual.main.SucursalBanco;
 
 public class PuntoDeInteresFactory {
-	public static PuntoDeInteres getGCP(double latitud, double longitud, String nombre, Direccion direccion, List<String> palabrasClave, ArrayList<Servicio> servicios, int comunaId){
+	public static PuntoDeInteres getGCP(double latitud, double longitud, String nombre, Direccion direccion, List<String> palabrasClave, List<Servicio> servicios, int comunaId){
 		CGP gcp=new CGP(servicios, comunaId);
 		PuntoDeInteres punto=new PuntoDeInteres(latitud, longitud, nombre, direccion, palabrasClave, gcp);
 		return punto;

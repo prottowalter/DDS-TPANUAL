@@ -2,13 +2,14 @@ package tpanual.main;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class CGP extends TipoPuntoInteres{
 	
-	ArrayList<Servicio> servicios;
+	List<Servicio> servicios;
 	private int comunaId;
 	
-	public ArrayList<Servicio> getServicios() {
+	public List<Servicio> getServicios() {
 		return servicios;
 	}
 
@@ -16,7 +17,7 @@ public class CGP extends TipoPuntoInteres{
 		return comunaId;
 	}
 
-	public CGP(ArrayList<Servicio> servicios, int comundaId) {
+	public CGP(List<Servicio> servicios, int comundaId) {
 		this.servicios=servicios;
 	}
 	
