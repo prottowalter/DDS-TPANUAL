@@ -9,8 +9,10 @@ import org.junit.Test;
 
 import tpanual.factory.PuntoDeInteresFactory;
 import tpanual.main.Direccion;
+import tpanual.main.LibreriaEscolar;
 import tpanual.main.Mapa;
 import tpanual.main.PuntoDeInteres;
+import tpanual.main.Rubro;
 import tpanual.main.Servicio;
 
 
@@ -66,6 +68,23 @@ public class MapaTest {
 		
 	}
 
+	@Test
+	public void testLibreriaEscolarCercana(){
+		Mapa mapa = Mapa.getInstance();
+		//Creo la dirección
+		Direccion direccionDeLaLibreria = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5389").crearDireccion();
+		ArrayList<String> palabrasClave = new ArrayList<String>();
+		palabrasClave.add("Surtida");
+		palabrasClave.add("Excelente Atención");
+		Rubro rubro = new LibreriaEscolar();
+		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.569553D, -58.492019D, "Lo de Tony", direccionDeLaLibreria, palabrasClave, rubro);
+		
+		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
+		
+	}
+	
+	//para libreria 
+	//assertFalse(mapa.esCercano(puntoFactory, -34.574647D, -58.485889D, 12));
 	/**
 	 * Este metodo deberia ser usado por los demas test para que este centralizado la creacion del Mapa con puntos adentro
 	 * @return
