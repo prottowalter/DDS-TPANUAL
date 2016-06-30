@@ -19,7 +19,8 @@ public class LocalComercial extends TipoPuntoInteres {
 
 	@Override
 	public boolean coincidencia(String x) {
-		return rubro.getNombre().indexOf(x)!=-1;
+		
+		return rubro.getNombre().toUpperCase().indexOf(x.toUpperCase())!=-1;
 	}
 
 	@Override

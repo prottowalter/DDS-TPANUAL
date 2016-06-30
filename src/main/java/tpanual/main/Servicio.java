@@ -16,6 +16,11 @@ public class Servicio {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	/**
+	 * Recibe una cantidad indeterminada de String y crea una clase Servicio con cada uno, luego devuelve la lista que las contiene a todas	
+	 * @param s
+	 * @return
+	 */
 	public static List<Servicio> getListaServicios(String... s){
 		List<Servicio> l=new ArrayList<Servicio>();
 		for (int a=0;a<s.length;a++){

@@ -25,7 +25,7 @@ public class ParadaColectivo extends TipoPuntoInteres {
 
 	@Override
 	public boolean coincidencia(String x) {
-		return linea.indexOf(x) != -1;
+		return linea.toUpperCase().indexOf(x.toUpperCase()) != -1;
 	}
 
 	@Override

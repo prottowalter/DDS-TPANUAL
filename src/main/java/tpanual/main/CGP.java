@@ -35,7 +35,7 @@ public class CGP extends TipoPuntoInteres{
 		Iterator<Servicio> it=servicios.iterator();
 		boolean aparicion=false;
 		while (it.hasNext() && !aparicion){
-			if (it.next().getNombre().indexOf(x) != -1) 
+			if (it.next().getNombre().toUpperCase().indexOf(x.toUpperCase()) != -1) 
 				aparicion=true;
 		}
 		return aparicion;
