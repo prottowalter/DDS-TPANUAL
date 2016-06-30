@@ -14,7 +14,7 @@ import tpanual.main.PuntoDeInteres;
 public class PuntoDeInteresTest {
 
 	@Test
-	public void cercanoATest(){
+	public void puntoCercanoACoordenadaTest(){
 		Mapa mapa = Mapa.getInstance();
 		//Creo la dirección
 		Direccion direccionDeLaSucursal= new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5201").crearDireccion();
