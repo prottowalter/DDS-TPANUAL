@@ -1,3 +1,4 @@
+package tpanual.test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import tpanual.main.Direccion;
 import tpanual.main.Mapa;
 import tpanual.main.PuntoDeInteres;
 import tpanual.main.Servicio;
+
+
 
 public class MapaTest {
 
@@ -37,7 +40,7 @@ public class MapaTest {
 		palabras.add("CGP");
 		palabras.add("Zona peligrosa");
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
-		PuntoDeInteres pdi=PuntoDeInteresFactory.getGCP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
+		PuntoDeInteres pdi=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
 		mapa.agregarPunto(pdi);
 		return mapa;
 	}
