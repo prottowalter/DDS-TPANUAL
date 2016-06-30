@@ -37,6 +37,24 @@ public class MapaTest {
 		
 	}
 	
+	@Test
+	public void testEsCercanoACgp(){
+		Mapa mapa = Mapa.getInstance();
+		//Creo la dirección
+		Direccion direccionCGP = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Miller").numero("2751").crearDireccion();
+		ArrayList<String> palabrasClave = new ArrayList<String>();
+		palabrasClave.add("CGP");
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil");
+		
+		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getCGP(-34.568574D, -58.482842D, "CGP 12", direccionCGP, palabrasClave, servicios, 12);
+		//TipoPuntoInteres tipo = puntoFactory.getGCP(latitud, longitud, nombre, direccion, palabrasClave, servicios, comunaId);
+		
+		assertTrue(mapa.esCercano(puntoFactory, -34.571896D, -58.490224D, 12));
+		//fail("Not yet implemented");
+		
+	}
+
+
 	/**
 	 * Este metodo deberia ser usado por los demas test para que este centralizado la creacion del Mapa con puntos adentro
 	 * @return

@@ -17,8 +17,9 @@ public class CGP extends TipoPuntoInteres{
 		return comunaId;
 	}
 
-	public CGP(List<Servicio> servicios, int comundaId) {
+	public CGP(List<Servicio> servicios, int comundaIid) {
 		this.servicios=servicios;
+		this.comunaId = comundaIid;
 	}
 	
 	public int getRadioCercania(){
