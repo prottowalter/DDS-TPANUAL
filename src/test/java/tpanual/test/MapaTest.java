@@ -17,24 +17,35 @@ import tpanual.main.Servicio;
 
 public class MapaTest {
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	public void buscarParadaDeColectivoTest(){
-		Mapa mapa=getMapaConPuntosDeInteres();
-		String criterio="114";
-		List<PuntoDeInteres> lista=mapa.obtenerPuntosDeInteres(criterio);
-		Iterator<PuntoDeInteres> i = lista.iterator();
-		while(i.hasNext()){
-			if (i.next().getNombre().equals("Para de la linea ciento catorce")){
-				assertTrue(true);
-			}
-		}
-		assertFalse(true);
 		
+		/**
+		 * Esta linea de colectivo esta en la lista de puntos de interes
+		 */
+		String criterio="114";
+		
+		List<PuntoDeInteres> lista=getMapaConPuntosDeInteres().obtenerPuntosDeInteres(criterio);
+		Iterator<PuntoDeInteres> i = lista.iterator();
+		
+		boolean aparicion=false;		
+		while(i.hasNext()){
+			
+			PuntoDeInteres n=i.next();
+			if (n.getNombre().equals("Parada de la linea ciento catorce")) aparicion=true;
+			
+		}
+		assertTrue(aparicion);
+		
+		/**
+		 * Esta linea NO esta en la lista
+		 */		
+		
+		criterio="113";
+		List<PuntoDeInteres> lista2=getMapaConPuntosDeInteres().obtenerPuntosDeInteres(criterio);		
+		
+		assertTrue(lista2.isEmpty());		
 	}
 	
 	@Test
@@ -71,7 +82,7 @@ public class MapaTest {
 	 * @return
 	 */
 	
-	public Mapa getMapaConPuntosDeInteres(){
+	private Mapa getMapaConPuntosDeInteres(){
 		Mapa mapa=Mapa.getInstance();
 		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
@@ -82,7 +93,7 @@ public class MapaTest {
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
 
 		PuntoDeInteres pdi=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
-		PuntoDeInteres pdi2=PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Para de la linea ciento catorce", direccion, palabras, "114");
+		PuntoDeInteres pdi2=PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Parada de la linea ciento catorce", direccion, palabras, "114");
 		
 		
 		mapa.agregarPunto(pdi);
