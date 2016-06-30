@@ -8,9 +8,9 @@ public class LocalComercial extends TipoPuntoInteres {
 		this.rubro=rubro;
 	}
 	
-	public void tuHorario () {
+	public boolean estaDisponible () {
 		//super.setHorario("09:00 a 18:00");
-		super.getHorario();
+			return false;
 		}
 
 	public int getRadioCercania() {

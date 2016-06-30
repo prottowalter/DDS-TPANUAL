@@ -1,4 +1,6 @@
 package tpanual.main;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Servicio {
 	private String nombre;
@@ -14,6 +16,6 @@ public class Servicio {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 	
 }
+

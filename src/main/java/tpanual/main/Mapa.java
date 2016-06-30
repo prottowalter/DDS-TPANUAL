@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-
 public class Mapa {
 	
+	private List<PuntoDeInteres> puntos = new ArrayList<PuntoDeInteres>();
+
 	private static Mapa instance;
-	
-	private List<PuntoDeInteres> puntos;
 	
 	public static Mapa getInstance(){
 		if (instance==null)
@@ -62,14 +60,15 @@ public class Mapa {
 		return (rad * 180 / Math.PI);
 	}
 	
-	//sebas
+	
 	public boolean esCercano(PuntoDeInteres punto, double latitud, double longitud, int comunaId){
 		
 		return (punto.cercanoA(latitud,longitud,comunaId));
 
 	}
+	
 	//marce
-	/*public boolean estaDisponible(Momento momento, String x){
+	/*public boolean estaDisponible(PuntoDeInteres, Momento momento, String x){
 	 * return true;
 	}
 	*/
@@ -87,3 +86,4 @@ public class Mapa {
 	}
 	
 }
+
