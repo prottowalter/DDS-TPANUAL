@@ -47,13 +47,24 @@ public class MapaTest {
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil");
 		
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getCGP(-34.568574D, -58.482842D, "CGP 12", direccionCGP, palabrasClave, servicios, 12);
-		//TipoPuntoInteres tipo = puntoFactory.getGCP(latitud, longitud, nombre, direccion, palabrasClave, servicios, comunaId);
-		
+				
 		assertTrue(mapa.esCercano(puntoFactory, -34.571896D, -58.490224D, 12));
-		//fail("Not yet implemented");
 		
 	}
 
+	@Test
+	public void testEsCercanoAUnaParada(){
+		Mapa mapa = Mapa.getInstance();
+		//Creo la dirección
+		Direccion direccionDeLaParada = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("DR. Ignacio Rivera").numero("1889").crearDireccion();
+		ArrayList<String> palabrasClave = new ArrayList<String>();
+		palabrasClave.add("Cerca a una Plaza");
+		
+		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getParadaDeColectivo(-34.572426D, -58.489022D,"Parada Línea 176", direccionDeLaParada, palabrasClave, "176");
+				
+		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
+		
+	}
 
 	/**
 	 * Este metodo deberia ser usado por los demas test para que este centralizado la creacion del Mapa con puntos adentro
