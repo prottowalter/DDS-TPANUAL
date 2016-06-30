@@ -13,6 +13,12 @@ package tpanual.main;
  */
 
 public class Direccion {
+	
+	public String toString(){
+		return callePrincipal+" " +entreCalle1+" " +entreCalle2+" " +numero+" " +piso+" " +departamento+" " +unidad+" " +codigoPostal+" " 
+		+barrio+" " +localidad+" " +provincia+" " +pais;
+	}
+	
 	private String callePrincipal;
 	private String entreCalle1;
 	private String entreCalle2;
@@ -28,6 +34,19 @@ public class Direccion {
 	
 	private Direccion(String callePrincipal, String entreCalle1, String entreCalle2, String numero, String piso, String departamento, String unidad, 
 			String codigoPostal, String barrio, String localidad, String provincia, String pais){	
+		
+		this.callePrincipal=callePrincipal;
+		this.entreCalle1=entreCalle1;
+		this.entreCalle2=entreCalle2;
+		this.numero=numero;
+		this.piso=piso;
+		this.departamento=departamento;
+		this.unidad=unidad;
+		this.codigoPostal=codigoPostal;
+		this.barrio=barrio;
+		this.localidad=localidad;
+		this.provincia=provincia;
+		this.pais=pais;		
 			
 	}
 	
