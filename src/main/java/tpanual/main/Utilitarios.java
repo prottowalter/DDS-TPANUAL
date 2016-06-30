@@ -8,7 +8,7 @@ public class Utilitarios {
 		Iterator<String> it=lista.iterator();
 		boolean aparicion=false;
 		while (it.hasNext() && !aparicion){
-			if (it.next().indexOf(x) != -1) 
+			if (it.next().toUpperCase().indexOf(x.toUpperCase()) != -1) 
 				aparicion=true;
 		}
 		return aparicion;

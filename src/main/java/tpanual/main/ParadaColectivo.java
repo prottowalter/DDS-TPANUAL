@@ -1,5 +1,5 @@
 package tpanual.main;
-
+	
 public class ParadaColectivo extends TipoPuntoInteres {
 
 	private String linea;
@@ -22,6 +22,14 @@ public class ParadaColectivo extends TipoPuntoInteres {
 
 	@Override
 	public boolean coincidencia(String x) {
-		return linea.indexOf(x) != -1;
+		return linea.toUpperCase().indexOf(x.toUpperCase()) != -1;
+	}
+
+	@Override
+	public boolean cercanoEntre(double latitudPunto, double longitudPunto, double latitudCoordenada,
+			double longitudCoordenada, int comunaId) {
+		Mapa map1 = Mapa.getInstance();
+		return (this.getRadioCercania()) >= (int) (map1.distance(latitudPunto,longitudPunto,latitudCoordenada,longitudCoordenada,"K") * 1000);
+		
 	}
 }

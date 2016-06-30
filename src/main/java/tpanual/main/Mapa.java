@@ -60,13 +60,15 @@ public class Mapa {
 		return (rad * 180 / Math.PI);
 	}
 	
-	//sebas
-	public boolean esCercano(PuntoDeInteres punto, int latitud, int longitud, int comunaId){
-		return true;
+	
+	public boolean esCercano(PuntoDeInteres punto, double latitud, double longitud, int comunaId){
+		
+		return (punto.cercanoA(latitud,longitud,comunaId));
+
 	}
 	
 	public boolean estaDisponible(PuntoDeInteres punto, Dias dia, int hora, String x){
-	  return punto.estaDisponible(dia, hora , x);
+		  return punto.estaDisponible(dia, hora , x);
 	}
 	
 	/**

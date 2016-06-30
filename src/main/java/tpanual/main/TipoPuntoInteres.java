@@ -14,4 +14,5 @@ public abstract class TipoPuntoInteres {
 	public abstract boolean estaDisponible(Dias dia, int hora, String x);
 	abstract public int getRadioCercania();
 	public abstract boolean coincidencia(String x);
+	public abstract boolean cercanoEntre(double latitudPunto,double longitudPunto,double latitudCoordenada,double longitudCoordenada, int comunaId);
 }
