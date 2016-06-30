@@ -52,7 +52,7 @@ public class MapaTest {
 	}
 	
 	@Test
-	public void testEsCercanoACgp(){
+	public void cercaniaCgpTest(){
 		Mapa mapa = Mapa.getInstance();
 		//Creo la dirección
 		Direccion direccionCGP = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Miller").numero("2751").crearDireccion();
@@ -64,10 +64,11 @@ public class MapaTest {
 				
 		assertTrue(mapa.esCercano(puntoFactory, -34.571896D, -58.490224D, 12));
 		
+		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
 	}
 
 	@Test
-	public void testEsCercanoAUnaParada(){
+	public void cercaniaAUnaParadaTest(){
 		Mapa mapa = Mapa.getInstance();
 		//Creo la dirección
 		Direccion direccionDeLaParada = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("DR. Ignacio Rivera").numero("1889").crearDireccion();
@@ -77,11 +78,11 @@ public class MapaTest {
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getParadaDeColectivo(-34.572426D, -58.489022D,"Parada Línea 176", direccionDeLaParada, palabrasClave, "176");
 				
 		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
-		
+		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
 	}
 
 	@Test
-	public void testLibreriaEscolarCercana(){
+	public void cercaniaALibreriaEscolarTest(){
 		Mapa mapa = Mapa.getInstance();
 		//Creo la dirección
 		Direccion direccionDeLaLibreria = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5389").crearDireccion();
@@ -92,11 +93,11 @@ public class MapaTest {
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.569553D, -58.492019D, "Lo de Tony", direccionDeLaLibreria, palabrasClave, rubro);
 		
 		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
-		
+		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
 	}
 	
 	@Test
-	public void testKioskoCercano(){
+	public void cercaniaKioskoTest(){
 		Mapa mapa = Mapa.getInstance();
 		//Creo la dirección
 		Direccion direccionDelKiosko = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5389").crearDireccion();
@@ -107,7 +108,7 @@ public class MapaTest {
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.573119D, -58.489301D, "Lo + Pancho", direccionDelKiosko, palabrasClave, rubro);
 		
 		assertTrue(mapa.esCercano(puntoFactory, -34.573001D, -58.490937D, 12));
-		
+		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
 	}
 	
 	
