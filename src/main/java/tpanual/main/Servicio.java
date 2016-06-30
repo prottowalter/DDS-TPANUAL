@@ -1,9 +1,8 @@
 package tpanual.main;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Servicio {
 	private String nombre;
+	private HorarioDeAtencion horario;
 	
 	public Servicio(String nombre){
 		this.nombre=nombre;
@@ -17,5 +16,12 @@ public class Servicio {
 		this.nombre = nombre;
 	}
 	
+	public HorarioDeAtencion getHorario(){
+		return horario;
+	}
+	
+	public void setHorario(HorarioDeAtencion horario){
+		this.horario = horario;
+	}
 }
 

@@ -1,7 +1,11 @@
 package tpanual.main;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 
 
@@ -26,7 +30,6 @@ public class PuntoDeInteres {
 		return latitud;
 	}
 
-
 	public double getLongitud() {
 		return longitud;
 	}
@@ -34,7 +37,6 @@ public class PuntoDeInteres {
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public Direccion getDireccion() {
 		return direccion;
@@ -44,11 +46,9 @@ public class PuntoDeInteres {
 		return tipo;
 	}
 
-	
 	public String coordenadas(){
 		return this.latitud + "," + this.longitud;
 	}
-	
 
 	public boolean cercanoA(int metros, PuntoDeInteres otroPoi){
 		Mapa map1 = new Mapa();
@@ -62,6 +62,10 @@ public class PuntoDeInteres {
 		
 		return Utilitarios.buscarPalabraEnUnaLista(x, palabrasClaves) || tipo.coincidencia(x)|| (nombre.indexOf(x) != -1);
 	}
-	
+
+	public boolean estaDisponible(Dias dia, int hora, String x) {
+		return tipo.estaDisponible(dia, hora, x);
+	}
+
 }
 

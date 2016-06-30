@@ -8,4 +8,6 @@ public abstract class Rubro {
 	}
 
 	abstract public int tuRadioDeCercania();
+	
+	abstract public HorarioDeAtencion getHorario();
 }
