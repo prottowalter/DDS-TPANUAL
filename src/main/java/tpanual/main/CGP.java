@@ -28,7 +28,21 @@ public class CGP extends TipoPuntoInteres{
 
 	@Override
 	public boolean estaDisponible(Dias dia, int hora, String x) {
-		return false;
+		boolean disponible = false;
+		if (x == ""){//si no se ingresa el nombre de ningun servicio
+			for(Servicio serv:servicios){
+				if (serv.getHorario().estaEnHorarioDeAtencion(dia, hora)) 
+					disponible=true;
+			}
+		}
+		else{
+			for(Servicio serv:servicios){
+				if (serv.getNombre().toUpperCase().indexOf(x.toUpperCase()) != -1){
+					disponible = serv.getHorario().estaEnHorarioDeAtencion(dia, hora);
+				}
+			}
+		}
+		return disponible;
 	}
 	
 	public boolean coincidencia(String x){

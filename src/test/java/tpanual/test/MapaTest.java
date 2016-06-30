@@ -10,7 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tpanual.factory.PuntoDeInteresFactory;
+import tpanual.main.Dias;
 import tpanual.main.Direccion;
+import tpanual.main.HorarioDeAtencion;
 import tpanual.main.Kiosko;
 import tpanual.main.LibreriaEscolar;
 import tpanual.main.Mapa;
@@ -167,7 +169,7 @@ public class MapaTest {
 		ArrayList<String> palabrasClave = new ArrayList<String>();
 		palabrasClave.add("Cerca a una Plaza");
 		
-		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getParadaDeColectivo(-34.572426D, -58.489022D,"Parada Línea 176", direccionDeLaParada, palabrasClave, "176");
+		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getParadaDeColectivo(-34.572426D, -58.489022D,"Parada Lú‹ea 176", direccionDeLaParada, palabrasClave, "176");
 				
 		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
 		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
@@ -230,6 +232,12 @@ public class MapaTest {
 		Rubro rubro1=new Muebleria("Muebleria");
 		Rubro rubro2=new Kiosko("Kiosko");
 
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());
+		servicios2.get(0).setHorario(getHorario3());
+		servicios2.get(1).setHorario(getHorario2());
+		
 		PuntoDeInteres pdi=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras2, servicios, 25);
 		PuntoDeInteres pdi2=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 2", direccion, palabras2, servicios2, 25);
 		PuntoDeInteres pdi3=PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Parada de la linea ciento catorce", direccion, palabras2, "114");
@@ -248,6 +256,32 @@ public class MapaTest {
 		mapa.agregarPunto(pdi7);
 		
 	}
+	
+	private static HorarioDeAtencion getHorario1(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO && dia != Dias.SABADO)
+				horario.addRangoDia(800, 1700, dia);
+		}
+		return horario;
+	}
 
+	private static HorarioDeAtencion getHorario2(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO)
+				horario.addRangoDia(1000, 1600, dia);
+		}
+		return horario;
+	}
+	
+	private static HorarioDeAtencion getHorario3(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO && dia != Dias.SABADO && dia != Dias.LUNES)
+				horario.addRangoDia(1200, 2000, dia);
+		}
+		return horario;
+	}
 }
 
