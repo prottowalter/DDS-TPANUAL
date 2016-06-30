@@ -48,4 +48,16 @@ public class CGP extends TipoPuntoInteres{
 		return this.comunaId == comunaId;
 
 	}
+	/**
+	 * Recibe un servicio y te dice si esta en la lista de servicios del CGP
+	 * @param x
+	 * @return
+	 */
+	public boolean estaEnLaListaDeServicios(String x){
+		Iterator<Servicio> i=servicios.iterator();
+		while (i.hasNext()){
+			if (i.next().getNombre().toUpperCase().indexOf(x.toUpperCase())!= -1) return true;
+		}
+		return false;
+	}
 }
