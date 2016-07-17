@@ -218,7 +218,7 @@ public class MapaTest {
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 		.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
-		palabras.add("Vende Falopa");
+		palabras.add("Servicio de cafeteria");
 		palabras.add("Mala Atencion");
 		
 		List<String> palabras2=new ArrayList<String>();

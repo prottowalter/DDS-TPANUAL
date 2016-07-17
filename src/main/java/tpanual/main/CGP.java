@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import tpanual.utilitarios.Constantes;
+
 public class CGP extends TipoPuntoInteres{
 	
 	List<Servicio> servicios;
@@ -23,12 +25,12 @@ public class CGP extends TipoPuntoInteres{
 	}
 	
 	public int getRadioCercania(){
-		return 0;
+		return Constantes.CGP_CERCANIA;
 	}
 
 	@Override
 	public boolean estaDisponible() {
-		return false;
+		return Constantes.CGP_COMERCIAL_DISPONIBILIDAD;
 	}
 	
 	public boolean coincidencia(String x){

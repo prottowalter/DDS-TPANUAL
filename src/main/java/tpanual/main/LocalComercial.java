@@ -1,5 +1,7 @@
 package tpanual.main;
 
+import tpanual.utilitarios.Constantes;
+
 public class LocalComercial extends TipoPuntoInteres {
 
 	private Rubro rubro;
@@ -10,7 +12,7 @@ public class LocalComercial extends TipoPuntoInteres {
 	
 	public boolean estaDisponible () {
 		//super.setHorario("09:00 a 18:00");
-			return false;
+			return Constantes.LOCAL_COMERCIAL_DISPONIBILIDAD;
 		}
 
 	public int getRadioCercania() {

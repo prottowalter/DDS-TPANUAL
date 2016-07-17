@@ -37,4 +37,11 @@ public class HorarioDeAtencion {
 				break;
 		}
 	}
+	/**
+	 * Implementar correctamente para de true cuando dos horarios de atencion son iguales
+	 */
+	
+	public boolean equals(Object o){
+		return false;
+	}
 }

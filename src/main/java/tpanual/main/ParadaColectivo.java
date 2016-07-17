@@ -1,6 +1,8 @@
 package tpanual.main;
 
-//import java.util.ArrayList;
+import tpanual.utilitarios.Constantes;
+
+
 
 public class ParadaColectivo extends TipoPuntoInteres {
 	
@@ -16,11 +18,11 @@ public class ParadaColectivo extends TipoPuntoInteres {
 
 	public boolean estaDisponible () {
 		//super.setHorario("09:00 a 18:00");
-		return true; //Una parada de colectivos siempre está dispnible
+		return Constantes.PARADA_DE_COLECTIVO_DISPONIBILIDAD; //Una parada de colectivos siempre está dispnible
 	}
 	
 	public int getRadioCercania(){
-		return 100;
+		return Constantes.PARADA_DE_COLECTIVO_RADIO_DE_CERCANIA;
 	}
 
 	@Override

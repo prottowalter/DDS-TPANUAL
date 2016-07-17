@@ -1,5 +1,7 @@
 package tpanual.main;
 
+import tpanual.utilitarios.Constantes;
+
 public class SucursalBanco extends TipoPuntoInteres{
 
 	HorarioDeAtencion horas = new HorarioDeAtencion();
@@ -11,18 +13,17 @@ public class SucursalBanco extends TipoPuntoInteres{
 
 	@Override
 	public int getRadioCercania() {
-		return 500;
+		return Constantes.SUCURSAL_BANCO_RADIO_DE_CERCANIA;
 	}
 
 	@Override
 	public boolean estaDisponible() {
-		// TODO Auto-generated method stub
-		return false;
+		return Constantes.SUCURSAL_BANCO_DISPONIBILIDAD;
 	}	
 
 	@Override
 	public boolean coincidencia(String x) {
-		return false;
+		return Constantes.SUCURSAL_BANCO_COINCIDENCIA;
 	}
 
 	@Override
