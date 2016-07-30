@@ -1,9 +1,10 @@
-package tpanual.main;
+package tpanual.main.poi;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import tpanual.main.Servicio;
 import tpanual.utilitarios.Constantes;
 
 public class CGP extends TipoPuntoInteres{

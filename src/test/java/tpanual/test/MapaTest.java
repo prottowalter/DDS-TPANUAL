@@ -9,15 +9,13 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tpanual.Rubro.RubroFW;
+import tpanual.Rubro.RubroFWFactory;
 import tpanual.factory.PuntoDeInteresFactory;
 import tpanual.main.Direccion;
-import tpanual.main.Kiosko;
-import tpanual.main.LibreriaEscolar;
 import tpanual.main.Mapa;
-import tpanual.main.Muebleria;
-import tpanual.main.PuntoDeInteres;
-import tpanual.main.Rubro;
 import tpanual.main.Servicio;
+import tpanual.main.poi.PuntoDeInteres;
 
 
 
@@ -181,7 +179,7 @@ public class MapaTest {
 		ArrayList<String> palabrasClave = new ArrayList<String>();
 		palabrasClave.add("Surtida");
 		palabrasClave.add("Excelente Atención");
-		Rubro rubro = new LibreriaEscolar("Libreria");
+		RubroFW rubro = RubroFWFactory.getRubro("Libreria Escolar", 500);
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.569553D, -58.492019D, "Lo de Tony", direccionDeLaLibreria, palabrasClave, rubro);
 		
 		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
@@ -196,7 +194,7 @@ public class MapaTest {
 		ArrayList<String> palabrasClave = new ArrayList<String>();
 		palabrasClave.add("Venden alcohol");
 		palabrasClave.add("Venden Panchos");
-		Rubro rubro = new Kiosko("Kiosko");
+		RubroFW rubro=RubroFWFactory.getRubro("Kiosko",  200);
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.573119D, -58.489301D, "Lo + Pancho", direccionDelKiosko, palabrasClave, rubro);
 		
 		assertTrue(mapa.esCercano(puntoFactory, -34.573001D, -58.490937D, 12));
@@ -227,8 +225,8 @@ public class MapaTest {
 		
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
 		List<Servicio> servicios2=Servicio.getListaServicios("Venta de chicles", "Asesoramiento legal");
-		Rubro rubro1=new Muebleria("Muebleria");
-		Rubro rubro2=new Kiosko("Kiosko");
+		RubroFW rubro1=RubroFWFactory.getRubro("Muebleria", 700);
+		RubroFW rubro2=RubroFWFactory.getRubro("Kiosko", 200);
 
 		PuntoDeInteres pdi=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras2, servicios, 25);
 		PuntoDeInteres pdi2=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 2", direccion, palabras2, servicios2, 25);

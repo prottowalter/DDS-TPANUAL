@@ -9,7 +9,7 @@ import org.junit.Test;
 import tpanual.factory.PuntoDeInteresFactory;
 import tpanual.main.Direccion;
 import tpanual.main.Mapa;
-import tpanual.main.PuntoDeInteres;
+import tpanual.main.poi.PuntoDeInteres;
 
 public class PuntoDeInteresTest {
 

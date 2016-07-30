@@ -1,8 +1,9 @@
-package tpanual.main;
+package tpanual.main.poi;
 
 //import java.util.Iterator;
 import java.util.List;
 
+import tpanual.main.Direccion;
 import tpanual.utilitarios.Utilitarios;
 
 

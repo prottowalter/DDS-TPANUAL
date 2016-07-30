@@ -1,4 +1,4 @@
-package tpanual.main;
+package tpanual.main.poi;
 
 
 

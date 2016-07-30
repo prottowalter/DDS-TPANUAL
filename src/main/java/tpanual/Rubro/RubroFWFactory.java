@@ -1,22 +1,23 @@
 package tpanual.Rubro;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import tpanual.main.HorarioDeAtencion;
 
 public class RubroFWFactory {
-	private List<RubroFW> rubros;
+	private static List<RubroFW> rubros=new ArrayList<RubroFW>();
 	
-	public RubroFW getRubro(String nombre, HorarioDeAtencion hda, int radioCercania){
+	public static RubroFW getRubro(String nombre, int radioCercania){
 		Iterator<RubroFW> it=rubros.iterator();
 		while (it.hasNext()){
 			RubroFW ocur=it.next();
-			if (ocur.esIgual(nombre, hda, radioCercania)){
+			if (ocur.esIgual(nombre, radioCercania)){
 				return ocur;
 			}			
 		}
-		RubroFW nuevoRubro=new RubroConcreteFW(hda, nombre, radioCercania);
+		RubroFW nuevoRubro=new RubroConcreteFW(nombre, radioCercania);
 		rubros.add(nuevoRubro);
 		return nuevoRubro;
 	}

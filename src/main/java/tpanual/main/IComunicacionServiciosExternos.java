@@ -2,6 +2,8 @@ package tpanual.main;
 
 import java.util.List;
 
+import tpanual.main.poi.PuntoDeInteres;
+
 public interface IComunicacionServiciosExternos {
 	/**
 	 * Recibe nombre de una calle o de una zona y devuelve la lista de CGPs que matchean, segun el servicio REST correspondiente.

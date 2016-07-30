@@ -1,5 +1,7 @@
-package tpanual.main;
+package tpanual.main.poi;
 
+import tpanual.main.HorarioDeAtencion;
+import tpanual.main.Mapa;
 import tpanual.utilitarios.Constantes;
 
 public class SucursalBanco extends TipoPuntoInteres{

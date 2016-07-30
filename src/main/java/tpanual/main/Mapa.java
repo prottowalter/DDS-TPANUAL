@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import tpanual.main.poi.PuntoDeInteres;
+
 public class Mapa {
 	
 	private List<PuntoDeInteres> puntos = new ArrayList<PuntoDeInteres>();

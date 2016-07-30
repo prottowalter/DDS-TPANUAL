@@ -1,40 +1,38 @@
-package tpanual.main;
+package tpanual.main.poi;
 
+import tpanual.Rubro.RubroFW;
+import tpanual.main.Mapa;
 import tpanual.utilitarios.Constantes;
 
+public class LocalComercial extends TipoPuntoInteres {
 
-
-public class ParadaColectivo extends TipoPuntoInteres {
+	private RubroFW rubro;
 	
-	private String linea;
+	public LocalComercial(RubroFW rubro){
+		this.rubro=rubro;
+	}
 	
-	public String getLinea() {
-		return linea;
-	}
-
-	public ParadaColectivo(String linea) {
-		this.linea=linea;
-	}
-
 	public boolean estaDisponible () {
 		//super.setHorario("09:00 a 18:00");
-		return Constantes.PARADA_DE_COLECTIVO_DISPONIBILIDAD; //Una parada de colectivos siempre está dispnible
-	}
-	
-	public int getRadioCercania(){
-		return Constantes.PARADA_DE_COLECTIVO_RADIO_DE_CERCANIA;
+			return Constantes.LOCAL_COMERCIAL_DISPONIBILIDAD;
+		}
+
+	public int getRadioCercania() {
+		return rubro.getCercania();
 	}
 
 	@Override
 	public boolean coincidencia(String x) {
-		return linea.toUpperCase().indexOf(x.toUpperCase()) != -1;
+		
+		return rubro.getNombre().toUpperCase().indexOf(x.toUpperCase())!=-1;
 	}
 
 	@Override
 	public boolean cercanoEntre(double latitudPunto, double longitudPunto, double latitudCoordenada,
 			double longitudCoordenada, int comunaId) {
+
 		Mapa map1 = Mapa.getInstance();
 		return (this.getRadioCercania()) >= (int) (map1.distance(latitudPunto,longitudPunto,latitudCoordenada,longitudCoordenada,"K") * 1000);
-		
 	}
+	
 }
