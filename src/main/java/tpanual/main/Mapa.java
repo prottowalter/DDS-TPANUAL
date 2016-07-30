@@ -77,7 +77,7 @@ public class Mapa {
 	/**
 	 * Recibe un texto libre, busca en los puntos de interes almacenados en el mapa, aquellos que cumplan coincidencia con el texto y los devuelve.
 	 */
-	public List<PuntoDeInteres> obtenerPuntosDeInteres(String x){
+	public List<PuntoDeInteres> buscarPuntosDeInteres(String x){
 		List<PuntoDeInteres> listaADevolver=new ArrayList<PuntoDeInteres>();
 		Iterator<PuntoDeInteres> it=puntos.iterator();
 		while (it.hasNext()){

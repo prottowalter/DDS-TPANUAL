@@ -31,7 +31,7 @@ public class MapaTest {
 		 */
 		String criterio="114";
 		
-		List<PuntoDeInteres> lista=mapa.obtenerPuntosDeInteres(criterio);
+		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
 		Iterator<PuntoDeInteres> i = lista.iterator();
 		
 		boolean aparicion=false;		
@@ -48,7 +48,7 @@ public class MapaTest {
 		 */		
 		
 		criterio="113";
-		List<PuntoDeInteres> lista2=mapa.obtenerPuntosDeInteres(criterio);		
+		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
 		
 		assertTrue(lista2.isEmpty());		
 	}
@@ -62,7 +62,7 @@ public class MapaTest {
 		 */
 		String criterio="muebleria";
 		
-		List<PuntoDeInteres> lista=mapa.obtenerPuntosDeInteres(criterio);
+		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
 		Iterator<PuntoDeInteres> i = lista.iterator();
 		
 		boolean aparicion1=false;
@@ -82,7 +82,7 @@ public class MapaTest {
 		 */		
 		
 		criterio="panaderia";
-		List<PuntoDeInteres> lista2=mapa.obtenerPuntosDeInteres(criterio);		
+		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
 		
 		assertTrue(lista2.isEmpty());		
 	}	
@@ -92,7 +92,7 @@ public class MapaTest {
 		
 		String criterio="mala atencion";
 		
-		List<PuntoDeInteres> lista=mapa.obtenerPuntosDeInteres(criterio);
+		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
 		
 		assertTrue(lista.size()==2);
 		
@@ -110,7 +110,7 @@ public class MapaTest {
 		assertTrue(aparicion1 && aparicion2);
 		
 		criterio="una palabra clave que no esta";
-		List<PuntoDeInteres> lista2=mapa.obtenerPuntosDeInteres(criterio);		
+		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
 		
 		assertTrue(lista2.isEmpty());		
 	}	
@@ -119,7 +119,7 @@ public class MapaTest {
 		
 		String criterio="Denuncias";
 		
-		List<PuntoDeInteres> lista=mapa.obtenerPuntosDeInteres(criterio);
+		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
 		
 		assertTrue(lista.size()==1);
 		
@@ -135,7 +135,7 @@ public class MapaTest {
 		assertTrue(aparicion1);
 		
 		criterio="Un servicio que no existe";
-		List<PuntoDeInteres> lista2=mapa.obtenerPuntosDeInteres(criterio);		
+		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
 		
 		assertTrue(lista2.isEmpty());		
 	}	
