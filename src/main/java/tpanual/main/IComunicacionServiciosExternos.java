@@ -14,7 +14,7 @@ public interface IComunicacionServiciosExternos {
 	public List<PuntoDeInteres> obtenerCGPEnCalleOZona (String calleOZona);
 	
 	/**
-	 * Recibe nombre de banco, algun servicio ofrecido por el mismo	y devuelve la lista de Bancos que matchean con ambos, segun el servicio REST correspondiente.
+	 * Recibe nombre de banco, algun servicio ofrecido por el mismo	y devuelve la lista de Bancos que matchea 7yn con ambos, segun el servicio REST correspondiente.
 	 * ATENCION: Servicio pago por cantidad de pegadas
 	 * @param
 	 * @return Lista de Bancos (puntos de interes)

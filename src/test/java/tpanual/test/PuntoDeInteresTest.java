@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import tpanual.factory.PuntoDeInteresFactory;
+import tpanual.main.ComunicacionServiciosExternos;
 import tpanual.main.Direccion;
 import tpanual.main.Mapa;
 import tpanual.main.poi.PuntoDeInteres;
@@ -25,6 +26,12 @@ public class PuntoDeInteresTest {
 								
 		assertFalse(mapa.esCercano(puntoFactory, -34.568459D, -58.486106D, 12));
 		assertTrue(mapa.esCercano(puntoFactory, -34.570581D, -58.489611D, 12));
+	}
+	
+	@Test
+	public void XXXXXXXXXXXXXXXXXXX(){
+		ComunicacionServiciosExternos com = new ComunicacionServiciosExternos();
+		com.obtenerCGPEnCalleOZona("hola");
 	}
 
 }
