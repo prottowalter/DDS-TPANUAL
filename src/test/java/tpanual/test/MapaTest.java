@@ -1,23 +1,20 @@
 package tpanual.test;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import tpanual.Rubro.RubroFW;
 import tpanual.Rubro.RubroFWFactory;
 import tpanual.factory.PuntoDeInteresFactory;
+import tpanual.main.Dias;
 import tpanual.main.Direccion;
+import tpanual.main.HorarioDeAtencion;
 import tpanual.main.Mapa;
 import tpanual.main.Servicio;
 import tpanual.main.poi.PuntoDeInteres;
-
-
 
 public class MapaTest {
 
@@ -165,7 +162,7 @@ public class MapaTest {
 		ArrayList<String> palabrasClave = new ArrayList<String>();
 		palabrasClave.add("Cerca a una Plaza");
 		
-		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getParadaDeColectivo(-34.572426D, -58.489022D,"Parada Línea 176", direccionDeLaParada, palabrasClave, "176");
+		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getParadaDeColectivo(-34.572426D, -58.489022D,"Parada Lú‹ea 176", direccionDeLaParada, palabrasClave, "176");
 				
 		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
 		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
@@ -204,6 +201,129 @@ public class MapaTest {
 	
 	//para libreria 
 	//assertFalse(mapa.esCercano(puntoFactory, -34.574647D, -58.485889D, 12));
+	
+	@Test
+	public void disponibilidadParadaColectivoTodoElDiaDomingoTest(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+		
+		PuntoDeInteres paradaDeColectivo = PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Parada de la linea ciento catorce", direccion, palabras, "114");
+		
+		for (int hora=0000;hora<2400;hora=hora+30)
+			assertTrue(mapa.estaDisponible(paradaDeColectivo, Dias.DOMINGO, hora, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadSucursalDeBancoDiaLunesALas1300Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+		
+		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras);
+		
+		assertTrue(mapa.estaDisponible(sucursalDeBanco, Dias.LUNES, 1300, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadSucursalDeBancoDiaViernesALas2200Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+		
+		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras);
+		
+		assertFalse(mapa.estaDisponible(sucursalDeBanco, Dias.SABADO, 2200, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadCarrouselDiaJuevesALas1730Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		RubroFW rubroCarrousel=RubroFWFactory.getRubro("Carrousel", 200);
+		PuntoDeInteres carrousel = PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Calesita", direccion, palabras, rubroCarrousel);
+		
+		assertTrue(mapa.estaDisponible(carrousel, Dias.JUEVES, 1730, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadCarrouselDiaMartesALas1500Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		RubroFW rubroCarrousel=RubroFWFactory.getRubro("Carrousel", 200);
+		PuntoDeInteres carrousel = PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Calesita", direccion, palabras, rubroCarrousel);
+		
+		assertFalse(mapa.estaDisponible(carrousel, Dias.MARTES, 1500, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadServicioDenunciasDiaMiercolesALas1100Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());		
+		
+		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
+		
+		assertTrue(mapa.estaDisponible(cgp, Dias.MARTES, 1100, "denuncias"));
+		
+	}
+	
+	@Test
+	public void disponibilidadDeAlgunServicioDiaLunesALas0900Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());		
+		
+		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
+		
+		assertTrue(mapa.estaDisponible(cgp, Dias.LUNES, 900, ""));
+		
+	}
+	
+	@Test
+	public void disponibilidadDeNingunServicioDiaDomingoALas0900Test(){
+		Mapa mapa = Mapa.getInstance();
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+				.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());		
+		
+		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
+		
+		assertFalse(mapa.estaDisponible(cgp, Dias.DOMINGO, 900, ""));
+		
+	}
+	
 	/**
 	 * Este metodo deberia ser usado por los demas test para que este centralizado la creacion del Mapa con puntos adentro
 	 * @return
@@ -228,6 +348,12 @@ public class MapaTest {
 		RubroFW rubro1=RubroFWFactory.getRubro("Muebleria", 700);
 		RubroFW rubro2=RubroFWFactory.getRubro("Kiosko", 200);
 
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());
+		servicios2.get(0).setHorario(getHorario3());
+		servicios2.get(1).setHorario(getHorario2());
+		
 		PuntoDeInteres pdi=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras2, servicios, 25);
 		PuntoDeInteres pdi2=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 2", direccion, palabras2, servicios2, 25);
 		PuntoDeInteres pdi3=PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Parada de la linea ciento catorce", direccion, palabras2, "114");
@@ -246,6 +372,32 @@ public class MapaTest {
 		mapa.agregarPunto(pdi7);
 		
 	}
+	
+	private static HorarioDeAtencion getHorario1(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO && dia != Dias.SABADO)
+				horario.addRangoDia(800, 1700, dia);
+		}
+		return horario;
+	}
 
+	private static HorarioDeAtencion getHorario2(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO)
+				horario.addRangoDia(1000, 1600, dia);
+		}
+		return horario;
+	}
+	
+	private static HorarioDeAtencion getHorario3(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO && dia != Dias.SABADO && dia != Dias.LUNES)
+				horario.addRangoDia(1200, 2000, dia);
+		}
+		return horario;
+	}
 }
 

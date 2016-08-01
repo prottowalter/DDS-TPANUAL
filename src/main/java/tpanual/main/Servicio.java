@@ -1,9 +1,11 @@
 package tpanual.main;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Servicio {
 	private String nombre;
+	private HorarioDeAtencion horario;
 	
 	public Servicio(String nombre){
 		this.nombre=nombre;
@@ -15,6 +17,14 @@ public class Servicio {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public HorarioDeAtencion getHorario(){
+		return horario;
+	}
+	
+	public void setHorario(HorarioDeAtencion horario){
+		this.horario = horario;
 	}
 	/**
 	 * Recibe una cantidad indeterminada de String y crea una clase Servicio con cada uno, luego devuelve la lista que las contiene a todas	

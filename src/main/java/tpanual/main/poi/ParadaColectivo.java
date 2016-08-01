@@ -1,23 +1,22 @@
 package tpanual.main.poi;
 
+import tpanual.main.Dias;
 import tpanual.main.Mapa;
 import tpanual.utilitarios.Constantes;
 
-
-
 public class ParadaColectivo extends TipoPuntoInteres {
-	
+
 	private String linea;
-	
+
 	public String getLinea() {
 		return linea;
 	}
 
 	public ParadaColectivo(String linea) {
-		this.linea=linea;
+		this.linea = linea;
 	}
 
-	public boolean estaDisponible () {
+	public boolean estaDisponible (Dias dia, int hora, String x) {
 		//super.setHorario("09:00 a 18:00");
 		return Constantes.PARADA_DE_COLECTIVO_DISPONIBILIDAD; //Una parada de colectivos siempre está dispnible
 	}
