@@ -25,8 +25,8 @@ public class ComunicacionServiciosExternos implements
 	                   .get(ClientResponse.class);
 			String s = response.getEntity(String.class);
 			JsonParser parser = new JsonParser();
-			Object obj = parser.parse(s);
-			JsonArray jsonArray = (JsonArray)obj;
+			
+			JsonArray jsonArray = (JsonArray)parser.parse(s);
 
 			return null;
 		} 
