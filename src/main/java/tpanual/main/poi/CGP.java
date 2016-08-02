@@ -1,15 +1,16 @@
 package tpanual.main.poi;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import tpanual.main.Dias;
 import tpanual.main.Servicio;
 import tpanual.utilitarios.Constantes;
 
 public class CGP extends TipoPuntoInteres{
 	
 	List<Servicio> servicios;
+	
 	private int comunaId;
 	
 	public List<Servicio> getServicios() {
@@ -30,8 +31,22 @@ public class CGP extends TipoPuntoInteres{
 	}
 
 	@Override
-	public boolean estaDisponible() {
-		return Constantes.CGP_COMERCIAL_DISPONIBILIDAD;
+	public boolean estaDisponible(Dias dia, int hora, String x) {
+		boolean disponible = false;
+		if (x == ""){//si no se ingresa el nombre de ningun servicio
+			for(Servicio serv:servicios){
+				if (serv.getHorario().estaEnHorarioDeAtencion(dia, hora)) 
+					disponible=true;
+			}
+		}
+		else{
+			for(Servicio serv:servicios){
+				if (serv.getNombre().toUpperCase().indexOf(x.toUpperCase()) != -1){
+					disponible = serv.getHorario().estaEnHorarioDeAtencion(dia, hora);
+				}
+			}
+		}
+		return disponible;
 	}
 	
 	public boolean coincidencia(String x){

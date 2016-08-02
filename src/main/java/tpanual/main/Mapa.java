@@ -69,11 +69,10 @@ public class Mapa {
 
 	}
 	
-	//marce
-	/*public boolean estaDisponible(PuntoDeInteres, Momento momento, String x){
-	 * return true;
+	public boolean estaDisponible(PuntoDeInteres punto, Dias dia, int hora, String x){
+		  return punto.estaDisponible(dia, hora , x);
 	}
-	*/
+	
 	/**
 	 * Recibe un texto libre, busca en los puntos de interes almacenados en el mapa, aquellos que cumplan coincidencia con el texto y los devuelve.
 	 */
@@ -88,4 +87,3 @@ public class Mapa {
 	}
 	
 }
-
