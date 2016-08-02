@@ -32,7 +32,7 @@ public class Direccion {
 	private String provincia;
 	private String pais;
 	
-	private Direccion(String callePrincipal, String entreCalle1, String entreCalle2, String numero, String piso, String departamento, String unidad, 
+	public Direccion(String callePrincipal, String entreCalle1, String entreCalle2, String numero, String piso, String departamento, String unidad, 
 			String codigoPostal, String barrio, String localidad, String provincia, String pais){	
 		
 		this.callePrincipal=callePrincipal;
