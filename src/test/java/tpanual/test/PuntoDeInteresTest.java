@@ -31,7 +31,7 @@ public class PuntoDeInteresTest {
 	@Test
 	public void XXXXXXXXXXXXXXXXXXX(){
 		ComunicacionServiciosExternos com = new ComunicacionServiciosExternos();
-		com.obtenerCGPEnCalleOZona("hola");
+		com.obtenerBancosPorNombreYServicio("Santander", "Pagos");
 	}
 
 }

@@ -1,9 +1,7 @@
 package tpanual.main;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,7 +9,6 @@ import com.google.gson.JsonParser;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-
 import tpanual.main.Direccion;
 import tpanual.main.HorarioDeAtencion;
 import tpanual.main.IComunicacionServiciosExternos;
@@ -86,26 +83,71 @@ public class ComunicacionServiciosExternos implements
 			Servicio servicio = new Servicio(
 					unServicioJsonObject.get("nombre").getAsString());
 			
-			List<HorarioDeAtencion> horarios = getHorariosServicio(unServicioJsonObject.get("horarios").getAsJsonArray());
-			
-			for(HorarioDeAtencion unHorario : horarios){
-				servicio.setHorario(unHorario);
-			}
+			HorarioDeAtencion horario = getHorariosServicio(unServicioJsonObject.get("horarios").getAsJsonArray());
+				
+			servicio.setHorario(horario);
 			
 			listServicios.add(servicio);
 		}
 		return listServicios;
 	}
 
-	private List<HorarioDeAtencion> getHorariosServicio(JsonArray asJsonArray) {
-		// TODO Auto-generated method stub
-		return null;
+	private HorarioDeAtencion getHorariosServicio(JsonArray asJsonArray) {
+		HorarioDeAtencion nuevoHorario = new HorarioDeAtencion();
+		
+		for (JsonElement unHorarioJsonElement: asJsonArray){
+			JsonObject unHorarioJsonObject = unHorarioJsonElement.getAsJsonObject();
+			
+			int dia = unHorarioJsonObject.get("diaSemana").getAsInt();
+			int horaDesde = unHorarioJsonObject.get("horaDesde").getAsInt()*100 + unHorarioJsonObject.get("minutosDesde").getAsInt();
+			int horaHasta = unHorarioJsonObject.get("horaHasta").getAsInt()*100 + unHorarioJsonObject.get("minutosHasta").getAsInt();
+			
+			switch (dia) {
+			case 0:
+				nuevoHorario.addRangoDia(horaDesde, horaHasta, Dias.DOMINGO);
+				break;
+			case 1:
+				nuevoHorario.addRangoDia(horaDesde, horaHasta, Dias.LUNES);
+				break;
+			case 2:
+				nuevoHorario.addRangoDia(horaDesde, horaHasta, Dias.MARTES);
+				break;
+			case 3:
+				nuevoHorario.addRangoDia(horaDesde, horaHasta, Dias.MIERCOLES);
+				break;
+			case 4:
+				nuevoHorario.addRangoDia(horaDesde, horaHasta, Dias.JUEVES);
+				break;
+			case 5:
+				nuevoHorario.addRangoDia(horaDesde, horaHasta, Dias.VIERNES);
+				break;
+			case 6:
+				nuevoHorario.addRangoDia(horaDesde, horaHasta, Dias.SABADO);
+				break;
+			}
+		}
+		return nuevoHorario;
 	}
 
 	@Override
 	public List<PuntoDeInteres> obtenerBancosPorNombreYServicio(
 			String nombreBanco, String nombreServicioOfrecido) {
-		// TODO Auto-generated method stub
+		try{
+			Client client = Client.create();
+			String strUrl = String.format("http://trimatek.org/Consultas/banco?banco=%s&servicio=%s", "Santander", "Pagos");
+			WebResource webResource = client.resource(strUrl);
+
+			ClientResponse response = webResource.accept("application/json")
+	                   .get(ClientResponse.class);
+			String s = response.getEntity(String.class);
+			JsonParser parser = new JsonParser();
+			
+			JsonArray jsonArray = (JsonArray)parser.parse(s);
+			
+		}
+		catch(Exception e){
+			
+		}
 		return null;
 	}
 
