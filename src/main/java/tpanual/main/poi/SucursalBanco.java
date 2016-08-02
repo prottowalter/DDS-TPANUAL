@@ -1,12 +1,16 @@
 package tpanual.main.poi;
 
+import java.util.List;
+
 import tpanual.main.Dias;
 import tpanual.main.HorarioDeAtencion;
 import tpanual.main.Mapa;
+import tpanual.main.Servicio;
 import tpanual.utilitarios.Constantes;
 
 public class SucursalBanco extends TipoPuntoInteres {
 
+	List<Servicio> servicios;
 	HorarioDeAtencion horario = new HorarioDeAtencion();
 
 	public SucursalBanco() {
@@ -23,8 +27,19 @@ public class SucursalBanco extends TipoPuntoInteres {
 
 	@Override
 	public boolean estaDisponible(Dias dia, int hora, String x) {
-		return horario.estaEnHorarioDeAtencion(dia, hora);
+		if (x == ""){//si no se ingresa el nombre de ningun servicio
+			return horario.estaEnHorarioDeAtencion(dia, hora);
+		}
+		else{
+			for(Servicio serv:servicios){
+				if (serv.getNombre().toUpperCase().indexOf(x.toUpperCase()) != -1){
+					return horario.estaEnHorarioDeAtencion(dia, hora);
+				}
+			}
+		}
+		return false;
 	}
+	
 	@Override
 	public boolean coincidencia(String x) {
 		return Constantes.SUCURSAL_BANCO_COINCIDENCIA;

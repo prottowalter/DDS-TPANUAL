@@ -222,8 +222,9 @@ public class MapaTest {
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
+		List<Servicio> servicios3=Servicio.getListaServicios("Depositos", "Extracciones");
 		
-		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras);
+		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
 		
 		assertTrue(mapa.estaDisponible(sucursalDeBanco, Dias.LUNES, 1300, ""));
 		
@@ -235,8 +236,9 @@ public class MapaTest {
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
+		List<Servicio> servicios3=Servicio.getListaServicios("Depositos", "Extracciones");
 		
-		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras);
+		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
 		
 		assertFalse(mapa.estaDisponible(sucursalDeBanco, Dias.SABADO, 2200, ""));
 		
@@ -345,6 +347,8 @@ public class MapaTest {
 		
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
 		List<Servicio> servicios2=Servicio.getListaServicios("Venta de chicles", "Asesoramiento legal");
+		List<Servicio> servicios3=Servicio.getListaServicios("Depositos", "Extracciones");
+		
 		RubroFW rubro1=RubroFWFactory.getRubro("Muebleria", 700);
 		RubroFW rubro2=RubroFWFactory.getRubro("Kiosko", 200);
 
@@ -360,7 +364,7 @@ public class MapaTest {
 		PuntoDeInteres pdi4=PuntoDeInteresFactory.getLocalComercial(-50D, 3000D, "Muebleria los dos hermanos", direccion, palabras2, rubro1);
 		PuntoDeInteres pdi5=PuntoDeInteresFactory.getLocalComercial(-5D, 3001D, "Muebleria somos la contra de los dos hermanos", direccion, palabras, rubro1);
 		PuntoDeInteres pdi6=PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Kiosko no se fia ni al cura parroco", direccion, palabras2, rubro2);
-		PuntoDeInteres pdi7=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras);
+		PuntoDeInteres pdi7=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
 		
 		
 		mapa.agregarPunto(pdi);

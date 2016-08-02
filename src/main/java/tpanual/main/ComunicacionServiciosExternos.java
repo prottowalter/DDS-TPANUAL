@@ -144,11 +144,21 @@ public class ComunicacionServiciosExternos implements
 			
 			JsonArray jsonArray = (JsonArray)parser.parse(s);
 			
-		}
-		catch(Exception e){
+			List<PuntoDeInteres> listaPois = new ArrayList<PuntoDeInteres>();
+			
+			for(JsonElement unPoiJsonElement : jsonArray){
+				
+				JsonObject unPoiJsonObject = unPoiJsonElement.getAsJsonObject();
+				listaPois.add(GenerarPoiAPartirDeDatosExternos(unPoiJsonObject));
+			}
+
+			return listaPois;
 			
 		}
-		return null;
+		catch(Exception e){
+			return null;
+		}
+		
 	}
 
 }
