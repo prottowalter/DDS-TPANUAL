@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.junit.Test;
 
+import administrador.Mapa;
+
 import tpanual.factory.PuntoDeInteresFactory;
 import tpanual.main.ComunicacionServiciosExternos;
 import tpanual.main.Direccion;
-import tpanual.main.Mapa;
 import tpanual.main.Servicio;
 import tpanual.main.poi.PuntoDeInteres;
 

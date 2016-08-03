@@ -3,9 +3,10 @@ package tpanual.main.poi;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import administrador.Mapa;
+
 import tpanual.main.Dias;
 import tpanual.main.Direccion;
-import tpanual.main.Mapa;
 import tpanual.utilitarios.Utilitarios;
 
 public class PuntoDeInteres {

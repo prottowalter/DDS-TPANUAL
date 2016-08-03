@@ -1,9 +1,9 @@
 package tpanual.main.poi;
 
+import administrador.Mapa;
 import tpanual.Rubro.RubroFW;
 import tpanual.main.Dias;
 import tpanual.main.HorarioDeAtencion;
-import tpanual.main.Mapa;
 
 public class LocalComercial extends TipoPuntoInteres {
 

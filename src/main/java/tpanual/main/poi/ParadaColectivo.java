@@ -1,7 +1,7 @@
 package tpanual.main.poi;
 
+import administrador.Mapa;
 import tpanual.main.Dias;
-import tpanual.main.Mapa;
 import tpanual.utilitarios.Constantes;
 
 public class ParadaColectivo extends TipoPuntoInteres {

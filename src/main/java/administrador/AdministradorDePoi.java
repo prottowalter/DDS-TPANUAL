@@ -2,7 +2,6 @@ package administrador;
 
 import java.util.List;
 
-import tpanual.main.Mapa;
 import tpanual.main.poi.PuntoDeInteres;
 
 public class AdministradorDePoi {

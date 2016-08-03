@@ -6,13 +6,14 @@ import java.util.Iterator;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import administrador.Mapa;
 import tpanual.Rubro.RubroFW;
 import tpanual.Rubro.RubroFWFactory;
 import tpanual.factory.PuntoDeInteresFactory;
 import tpanual.main.Dias;
 import tpanual.main.Direccion;
 import tpanual.main.HorarioDeAtencion;
-import tpanual.main.Mapa;
 import tpanual.main.Servicio;
 import tpanual.main.poi.PuntoDeInteres;
 

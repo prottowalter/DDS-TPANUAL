@@ -2,9 +2,10 @@ package tpanual.main.poi;
 
 import java.util.List;
 
+import administrador.Mapa;
+
 import tpanual.main.Dias;
 import tpanual.main.HorarioDeAtencion;
-import tpanual.main.Mapa;
 import tpanual.main.Servicio;
 import tpanual.utilitarios.Constantes;
 
