@@ -37,8 +37,7 @@ public class LocalComercial extends TipoPuntoInteres {
 	public boolean cercanoEntre(double latitudPunto, double longitudPunto, double latitudCoordenada,
 			double longitudCoordenada, int comunaId) {
 
-		Mapa map1 = Mapa.getInstance();
-		return (this.getRadioCercania()) >= (int) (map1.distance(latitudPunto,longitudPunto,latitudCoordenada,longitudCoordenada,"K") * 1000);
+		return (this.getRadioCercania()) >= (int) (PuntoDeInteres.distance(latitudPunto,longitudPunto,latitudCoordenada,longitudCoordenada,"K") * 1000);
 	}
 
 }
