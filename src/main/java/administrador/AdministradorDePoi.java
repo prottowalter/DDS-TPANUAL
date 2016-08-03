@@ -2,20 +2,21 @@ package administrador;
 
 import java.util.List;
 
+import tpanual.main.Mapa;
 import tpanual.main.poi.PuntoDeInteres;
 
 public class AdministradorDePoi {
 	public boolean modificarPoi(PuntoDeInteres poi){
-		
+		return false;
 	}
 	
 	public void agregarPoi(PuntoDeInteres poi){
-		
+		Mapa.getInstance().agregarPunto(poi);
 	}
 	public boolean eliminarPoi(PuntoDeInteres poi){
-		
+		return (Mapa.getInstance().eliminarPunto(poi.getId()) != null);
 	}
 	public List<PuntoDeInteres> busquedaDePuntosDeInteres(String x){
-		
+		return Mapa.getInstance().buscarPuntosDeInteres(x);
 	}
 }

@@ -23,9 +23,11 @@ public class Mapa {
 	}
 	
 	public void agregarPunto(PuntoDeInteres punto){
-		puntos.add(punto);
+		puntos.add(punto.getId(), punto);
 	}
-	
+	public PuntoDeInteres eliminarPunto(int id){
+		return puntos.remove(id);
+	}	
 	//public static void main (String[] args) throws java.lang.Exception
 	//{
 		//System.out.println(distance(32.9697, -96.80322, 29.46786, -98.53506, "M") + " Miles\n");
@@ -85,5 +87,4 @@ public class Mapa {
 		}
 		return listaADevolver;
 	}
-	
 }
