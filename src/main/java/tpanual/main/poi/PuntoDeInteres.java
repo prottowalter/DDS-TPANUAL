@@ -76,7 +76,7 @@ public class PuntoDeInteres {
 		return id;
 	}
 	
-<<<<<<< HEAD
+
 	/*
 	 * Seba: Agrego los métodos de cálculo de distancia en la clase de punto de interés
 	 * para que se use todo desde el administradr sin acceder directamente a mapa
