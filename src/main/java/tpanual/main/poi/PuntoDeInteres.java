@@ -119,7 +119,7 @@ public class PuntoDeInteres {
 			return (rad * 180 / Math.PI);
 		}
 		
-=======
+
 	public boolean afectarCambios(PuntoDeInteres poi) {
 		Class<?> clase=this.getClass();
 		for (int a=0;a<fieldsModificables.length;a++){
@@ -142,7 +142,6 @@ public class PuntoDeInteres {
 		}
 		return true;
 	}
->>>>>>> eca1d5d55db7a2412d39b9e37d476d96075cb51e
 
 }
 
