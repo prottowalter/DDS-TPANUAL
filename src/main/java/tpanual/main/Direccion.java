@@ -50,6 +50,10 @@ public class Direccion {
 			
 	}
 	
+	public boolean equals(Object o){
+		return ((o instanceof Direccion) && o.toString().equals(this));
+	}
+	
 	public String getCallePrincipal() {
 		return callePrincipal;
 	}
