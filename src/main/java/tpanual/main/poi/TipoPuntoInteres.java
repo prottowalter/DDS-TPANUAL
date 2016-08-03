@@ -17,4 +17,11 @@ public abstract class TipoPuntoInteres {
 	abstract public int getRadioCercania();
 	public abstract boolean coincidencia(String x);
 	public abstract boolean cercanoEntre(double latitudPunto,double longitudPunto,double latitudCoordenada,double longitudCoordenada, int comunaId);
+	
+	public boolean equals(Object o){
+		if (!(o instanceof TipoPuntoInteres))
+			return false;
+		TipoPuntoInteres tpi=(TipoPuntoInteres) o;
+		return (tpi.horario!= null && tpi.horario.equals(this.horario));
+	}
 }

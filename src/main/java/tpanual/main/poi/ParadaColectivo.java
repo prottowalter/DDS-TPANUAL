@@ -37,4 +37,11 @@ public class ParadaColectivo extends TipoPuntoInteres {
 		return (this.getRadioCercania()) >= (int) (PuntoDeInteres.distance(latitudPunto,longitudPunto,latitudCoordenada,longitudCoordenada,"K") * 1000);
 		
 	}
+	
+	public boolean equals(Object o){
+		if (!(o instanceof LocalComercial))
+			return false;
+		ParadaColectivo pc=(ParadaColectivo) o;
+		return ((linea!=null && linea.equals(pc.linea) || linea==null && pc.linea==null) && super.equals(o));
+	}	
 }

@@ -52,4 +52,12 @@ public class SucursalBanco extends TipoPuntoInteres {
 		return (this.getRadioCercania()) >= (int) (PuntoDeInteres.distance(latitudPunto,longitudPunto,latitudCoordenada,longitudCoordenada,"K") * 1000);
 	}
 	
+	public boolean equals(Object o){
+		if (!(o instanceof LocalComercial))
+			return false;
+		SucursalBanco sb=(SucursalBanco) o;
+		return ((servicios!=null && servicios.equals(sb.servicios) || servicios==null && sb.servicios==null) &&
+				(horario!=null && horario.equals(sb.horario) || horario==null && sb.horario==null)
+				&& super.equals(o));
+	}	
 }

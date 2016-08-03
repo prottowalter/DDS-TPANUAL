@@ -51,7 +51,11 @@ public class Direccion {
 	}
 	
 	public boolean equals(Object o){
-		return ((o instanceof Direccion) && o.toString().equals(this));
+		if (!(o instanceof Direccion)) 
+			return false;
+		Direccion d=(Direccion) o;
+		return d.toString().equals(this.toString());
+		
 	}
 	
 	public String getCallePrincipal() {

@@ -78,4 +78,11 @@ public class CGP extends TipoPuntoInteres{
 		}
 		return false;
 	}
+	
+	public boolean equals(Object o){
+		if (!(o instanceof CGP))
+			return false;
+		CGP cgp=(CGP) o;
+		return ((servicios!=null && servicios.equals(cgp.servicios) || servicios==null && cgp.servicios==null) && comunaId==cgp.comunaId && super.equals(o));
+	}
 }

@@ -39,5 +39,11 @@ public class LocalComercial extends TipoPuntoInteres {
 
 		return (this.getRadioCercania()) >= (int) (PuntoDeInteres.distance(latitudPunto,longitudPunto,latitudCoordenada,longitudCoordenada,"K") * 1000);
 	}
-
+	public boolean equals(Object o){
+		if (!(o instanceof LocalComercial))
+			return false;
+		LocalComercial lc=(LocalComercial) o;
+		return ((rubro!=null && rubro.equals(lc.rubro) || rubro==null && lc.rubro==null) && 
+				(horario!=null && horario.equals(lc.horario) || horario==null && lc.horario==null) && super.equals(o));
+	}
 }

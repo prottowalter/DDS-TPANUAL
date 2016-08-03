@@ -22,4 +22,11 @@ public class RubroConcreteFW implements RubroFW{
 				(nombre!=null && nombre.equals(this.nombre) || nombre==null));  		
 	}
 	
+	public boolean equals(Object o){
+		if (!(o instanceof RubroConcreteFW))
+			return false;
+		RubroConcreteFW rc=(RubroConcreteFW) o;
+		return rc.esIgual(nombre, cercania);
+	}
+	
 }
