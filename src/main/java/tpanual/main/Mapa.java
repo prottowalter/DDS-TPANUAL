@@ -49,4 +49,11 @@ public class Mapa {
 		return listaADevolver;
 	}
 	
+<<<<<<< HEAD
+=======
+	public PuntoDeInteres obtenerPuntoDeInteres(int id){
+		return puntos.get(id);
+	}
+	
+>>>>>>> eca1d5d55db7a2412d39b9e37d476d96075cb51e
 }
