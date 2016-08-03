@@ -1,5 +1,6 @@
 package tpanual.main.poi;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import tpanual.main.Dias;
@@ -14,6 +15,9 @@ public class PuntoDeInteres {
 	private Direccion direccion;
 	private TipoPuntoInteres tipo;
 	private List<String> palabrasClaves;
+	
+	//Para modificar POI
+	private static String[] fieldsModificables={"latitud", "longitud", "nombre", "direccion", "tipo", "palabrasClaves"};
 	
 	private static int maxId=0;
 	
@@ -69,6 +73,29 @@ public class PuntoDeInteres {
 
 	public int getId() {
 		return id;
+	}
+	
+	public boolean afectarCambios(PuntoDeInteres poi) {
+		Class<?> clase=this.getClass();
+		for (int a=0;a<fieldsModificables.length;a++){
+			try{
+				Field f=clase.getDeclaredField(fieldsModificables[a]);
+				Object s1=f.get(poi);
+				Object s2=f.get(this);
+				if (s1.equals(s2))
+					f.set(this, s2);
+			}catch(NoSuchFieldException nsfe){
+				nsfe.printStackTrace();
+				System.out.println("Error, no existe el field " + fieldsModificables[a] + " en la clase " + clase.getCanonicalName());
+				return false;
+			}catch(IllegalAccessException iae){
+				iae.printStackTrace();
+				System.out.println("Error, no se puede acceder a " + fieldsModificables[a] + " en la clase " + clase.getCanonicalName());
+				return false;
+			}
+			
+		}
+		return true;
 	}
 
 }

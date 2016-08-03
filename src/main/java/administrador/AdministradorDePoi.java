@@ -7,6 +7,9 @@ import tpanual.main.poi.PuntoDeInteres;
 
 public class AdministradorDePoi {
 	public boolean modificarPoi(PuntoDeInteres poi){
+		PuntoDeInteres aModificar=Mapa.getInstance().obtenerPuntoDeInteres(poi.getId());
+		if (aModificar!=null)
+			return aModificar.afectarCambios(poi);
 		return false;
 	}
 	
