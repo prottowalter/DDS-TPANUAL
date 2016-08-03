@@ -11,4 +11,6 @@ public class Constantes {
 	public static final boolean CGP_COMERCIAL_DISPONIBILIDAD=false;
 	
 	public static final boolean SUCURSAL_BANCO_COINCIDENCIA=false;
+	
+	public static final int INTERVALO_DEHORAS_CONSIDERA_BUSQUEDA_RECIENTE=72;
 }

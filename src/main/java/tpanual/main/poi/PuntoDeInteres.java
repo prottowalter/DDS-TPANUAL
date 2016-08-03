@@ -7,14 +7,18 @@ import tpanual.main.Direccion;
 import tpanual.utilitarios.Utilitarios;
 
 public class PuntoDeInteres {
-	double latitud;
-	double longitud;
-	String nombre;
-	Direccion direccion;
-	TipoPuntoInteres tipo;
-	List<String> palabrasClaves;
+	private int id;
+	private double latitud;
+	private double longitud;
+	private String nombre;
+	private Direccion direccion;
+	private TipoPuntoInteres tipo;
+	private List<String> palabrasClaves;
+	
+	private static int maxId=0;
 	
 	public PuntoDeInteres(double latitud, double longitud, String nombre, Direccion direccion, List<String> palabrasClaves, TipoPuntoInteres tipo) {
+		this.id=++maxId;
 		this.latitud=latitud;
 		this.longitud=longitud;
 		this.nombre=nombre;
@@ -61,6 +65,10 @@ public class PuntoDeInteres {
 
 	public boolean estaDisponible(Dias dia, int hora, String x) {
 		return tipo.estaDisponible(dia, hora, x);
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }
