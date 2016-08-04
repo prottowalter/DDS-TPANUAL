@@ -19,7 +19,12 @@ public class AdministradorDePoi {
 	public boolean eliminarPoi(PuntoDeInteres poi){
 		return (Mapa.getInstance().eliminarPunto(poi.getId()) != null);
 	}
+	
 	public List<PuntoDeInteres> busquedaDePuntosDeInteres(String x){
+		busquedaDePuntosDeInteres(x, false);
+	}
+	
+	public List<PuntoDeInteres> busquedaDePuntosDeInteres(String x, boolean test){
 		Busqueda busqueda=AdministradorDeBusquedas.getInstance().getBusquedaAnterior(x);
 		List<PuntoDeInteres> lista;
 		if (busqueda!=null){
@@ -31,7 +36,7 @@ public class AdministradorDePoi {
 				return lista;
 			}
 		}
-		lista=buscarEfectivamente(x);
+		lista=buscarEfectivamente(x, test);
 		AdministradorDeBusquedas.getInstance().agregarBusqueda(x, lista);
 		return lista;
 	}
@@ -47,7 +52,7 @@ public class AdministradorDePoi {
 		return lista;
 	}
 	
-	private List<PuntoDeInteres> buscarEfectivamente(String x){
-		return Mapa.getInstance().buscarPuntosDeInteres(x);
+	private List<PuntoDeInteres> buscarEfectivamente(String x, boolean test){
+		return Mapa.getInstance().buscarPuntosDeInteres(x, test);
 	}
 }
