@@ -52,18 +52,22 @@ public class Mapa {
 	/**
 	 * Recibe un texto libre, busca en los puntos de interes almacenados en el mapa, aquellos que cumplan coincidencia con el texto y los devuelve.
 	 */
-	public List<PuntoDeInteres> buscarPuntosDeInteres(String x){
+	public List<PuntoDeInteres> buscarPuntosDeInteres(String x, boolean test){
 		List<PuntoDeInteres> listaADevolver=new ArrayList<PuntoDeInteres>();
 		Iterator<PuntoDeInteres> it=puntos.iterator();
 		while (it.hasNext()){
 			PuntoDeInteres punto=it.next();
 			if (punto.buscarCoincidencia(x)) listaADevolver.add(punto);
 		}
-		List<PuntoDeInteres> listaExterna=buscarEnFuentesExternas(x);
+		List<PuntoDeInteres> listaExterna=buscarEnFuentesExternas(x, test);
 		agregarAMemoria(listaExterna);
 		listaADevolver.addAll(listaExterna);
 		return listaADevolver;
 	}
+	public List<PuntoDeInteres> buscarPuntosDeInteres(String x){
+		buscarPuntosDeInteres(x, false);
+	}
+	
 	
 	public PuntoDeInteres obtenerPuntoDeInteres(int id){
 		return puntos.get(id);
@@ -74,18 +78,22 @@ public class Mapa {
 	 * @return
 	 */
 	
-	private List<PuntoDeInteres> buscarEnFuentesExternas(String x){
+	private List<PuntoDeInteres> buscarEnFuentesExternas(String x, boolean test){
 		Iterator<AdaptadorServicioExterno> i=adaptadores.iterator();
 		List<PuntoDeInteres> lista=new ArrayList<PuntoDeInteres>();
 		while (i.hasNext()){
 			AdaptadorServicioExterno adaptador=i.next();
-			lista.addAll(adaptador.buscar(x));
+			if (!test){
+				lista.addAll(adaptador.buscar(x));
+			}else{
+				//llamar al mock
+			}
 		}
 		return lista;
 	}
 	
 	/**
-	 * Agrega a la lista de POI en memoria la lista que recibe por par·metro
+	 * Agrega a la lista de POI en memoria la lista que recibe por par√°metro
 	 * @param lista
 	 */
 	
