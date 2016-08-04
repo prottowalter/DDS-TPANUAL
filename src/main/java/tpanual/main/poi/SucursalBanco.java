@@ -20,6 +20,10 @@ public class SucursalBanco extends TipoPuntoInteres {
 				horario.addRangoDia(1000, 1500, dia);
 		}
 	}
+	
+	public void setServicios(List<Servicio> paramServicios){
+		servicios = paramServicios;
+	}
 
 	@Override
 	public int getRadioCercania() {

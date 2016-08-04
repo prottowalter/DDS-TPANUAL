@@ -2,6 +2,7 @@ package tpanual.main;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,12 +10,14 @@ import com.google.gson.JsonParser;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+
 import tpanual.main.Direccion;
 import tpanual.main.HorarioDeAtencion;
 import tpanual.main.IComunicacionServiciosExternos;
 import tpanual.main.Servicio;
 import tpanual.main.poi.CGP;
 import tpanual.main.poi.PuntoDeInteres;
+import tpanual.main.poi.SucursalBanco;
 
 public class ComunicacionServiciosExternos implements
 		IComunicacionServiciosExternos {
@@ -71,7 +74,7 @@ public class ComunicacionServiciosExternos implements
 
 	private Direccion parsearDireccion(String direccionSerealizada) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Direccion("","","","","","","","","","","","");
 	}
 
 	private List<Servicio> getServiciosCGP(JsonArray serviciosJsonArray) {
@@ -149,9 +152,8 @@ public class ComunicacionServiciosExternos implements
 			for(JsonElement unPoiJsonElement : jsonArray){
 				
 				JsonObject unPoiJsonObject = unPoiJsonElement.getAsJsonObject();
-				listaPois.add(GenerarPoiAPartirDeDatosExternos(unPoiJsonObject));
+				listaPois.add(GenerarPoiBancoAPartirDeDatosExternos(unPoiJsonObject));
 			}
-
 			return listaPois;
 			
 		}
@@ -159,6 +161,39 @@ public class ComunicacionServiciosExternos implements
 			return null;
 		}
 		
+	}
+
+	private PuntoDeInteres GenerarPoiBancoAPartirDeDatosExternos(
+			JsonObject unPoiJsonObject) {
+		
+		SucursalBanco tipoPoi = new SucursalBanco();
+
+		List<Servicio> servicios = GetServiciosBanco(unPoiJsonObject.get("servicios").getAsJsonArray());
+		tipoPoi.setServicios(servicios);
+		PuntoDeInteres poi = 
+				new PuntoDeInteres(
+						0,
+						0,
+						"",
+						parsearDireccion(""),
+						new ArrayList<String>(),
+						tipoPoi);
+		
+		return poi;
+		
+	}
+
+	private List<Servicio> GetServiciosBanco(JsonArray jsonArray) {
+		List<Servicio> servicios = new ArrayList<Servicio>();
+	
+		for(JsonElement unServicioJsonElement : jsonArray){
+			
+			JsonObject unServicioJsonObject = unServicioJsonElement.getAsJsonObject();
+			String nombreServicio = unServicioJsonObject.getAsString();
+			Servicio unServicio = new Servicio(nombreServicio);
+			servicios.add(unServicio);
+		}
+		return servicios;
 	}
 
 }
