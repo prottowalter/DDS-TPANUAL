@@ -327,6 +327,136 @@ public class MapaTest {
 		
 	}
 	
+	
+	
+	/*
+	 * ABMC entrega 2
+	 * Revisar luego de que se completen los metodos, recordar crear el admin
+	 */
+	
+	
+	@Test
+	public void eliminarPoiTest(){
+	
+	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
+	assertTrue(lista.size()==7);
+	
+	Iterator<PuntoDeInteres> i = lista.iterator();
+	boolean aparicion1=false;
+	while(i.hasNext()){	
+		PuntoDeInteres n=i.next();
+		if (n.getNombre().equals("Sucursal 49")) aparicion1=true;
+	}
+	
+	assertTrue(aparicion1);
+	
+	lista.clear();
+	
+	lista=mapa.buscarPuntosDeInteres("Sucursal 49");
+	
+	i = lista.iterator();
+	while(i.hasNext()){	
+		PuntoDeInteres n=i.next();
+		administrador.eliminarPoi(n); 
+	}
+	
+	lista.clear();
+	lista=mapa.buscarPuntosDeInteres("Sucursal 49");
+	assertTrue(lista.size()==0);
+	
+	lista=mapa.buscarPuntosDeInteres("");
+	assertTrue(lista.size()==6);
+	
+	}
+	
+
+	
+	
+	@Test
+	public void agregarPoiTest(){
+	
+	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
+	assertTrue(lista.size()==7);
+	
+	Iterator<PuntoDeInteres> i = lista.iterator();
+	boolean aparicion1=false;
+	while(i.hasNext()){	
+		PuntoDeInteres n=i.next();
+		if (n.getNombre().equals("Sucursal 42")) aparicion1=true;
+	}
+	
+	assertFalse(aparicion1);
+	
+	lista.clear();
+	
+	Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+			.provincia("Ciudad de Buenos Aires").crearDireccion();
+			List<String> palabras=new ArrayList<String>();
+			palabras.add("Servicio de cafeteria");
+			List<Servicio> servicios2=Servicio.getListaServicios("Venta de chicles", "Asesoramiento legal");
+			PuntoDeInteres pdiAAgregar=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 42", direccion, palabras, servicios2);
+	
+	administrador.agregarPoi(poiAAgregar)
+	
+	lista=mapa.buscarPuntosDeInteres("");
+	assertTrue(lista.size()==8);
+	
+	Iterator<PuntoDeInteres> j = lista.iterator();
+	aparicion1=false;
+	while(j.hasNext()){	
+		PuntoDeInteres n=j.next();
+		if (n.getNombre().equals("Sucursal 42")) aparicion1=true;
+		}
+
+	}
+	
+
+
+	@Test
+	public void modificarPoiTest(){
+	
+	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
+	assertTrue(lista.size()==7);
+	
+	Iterator<PuntoDeInteres> i = lista.iterator();
+	boolean aparicion1=false;
+	boolean aparicion2=false;
+	while(i.hasNext()){	
+		PuntoDeInteres n=i.next();
+		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
+		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
+	}
+
+	assertFalse(aparicion1);
+	assertTrue(aparicion2);
+	
+	//"modifico" poi.
+	//ver como va a funcionar este metodo modificar
+	Iterator<PuntoDeInteres> j = lista.iterator();
+	while(j.hasNext()){	
+		PuntoDeInteres n=j.next();
+		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("Mala Atencion")) administrador.modificarPoi(n);;
+	}
+	  
+
+	Iterator<PuntoDeInteres> p = lista.iterator();
+	aparicion1=false;
+	aparicion2=false;
+	while(p.hasNext()){	
+		PuntoDeInteres n=i.next();
+		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
+		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
+	}
+
+	assertFalse(aparicion2);
+	assertTrue(aparicion1);
+	
+	}
+	
+	
+	
+	
+	
 	/**
 	 * Este metodo deberia ser usado por los demas test para que este centralizado la creacion del Mapa con puntos adentro
 	 * @return
