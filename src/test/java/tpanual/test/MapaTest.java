@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import administrador.AdministradorDePoi;
 import administrador.Mapa;
 import tpanual.Rubro.RubroFW;
 import tpanual.Rubro.RubroFWFactory;
@@ -328,6 +329,8 @@ public class MapaTest {
 	}
 	
 	
+
+	
 	
 	/*
 	 * ABMC entrega 2
@@ -337,6 +340,7 @@ public class MapaTest {
 	
 	@Test
 	public void eliminarPoiTest(){
+	AdministradorDePoi administrador = new AdministradorDePoi();
 	
 	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
 	assertTrue(lista.size()==7);
@@ -374,7 +378,9 @@ public class MapaTest {
 	
 	@Test
 	public void agregarPoiTest(){
-	
+		
+	AdministradorDePoi administrador = new AdministradorDePoi();
+		
 	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
 	assertTrue(lista.size()==7);
 	
@@ -396,7 +402,7 @@ public class MapaTest {
 			List<Servicio> servicios2=Servicio.getListaServicios("Venta de chicles", "Asesoramiento legal");
 			PuntoDeInteres pdiAAgregar=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 42", direccion, palabras, servicios2);
 	
-	administrador.agregarPoi(poiAAgregar)
+	administrador.agregarPoi(pdiAAgregar);
 	
 	lista=mapa.buscarPuntosDeInteres("");
 	assertTrue(lista.size()==8);
@@ -414,6 +420,8 @@ public class MapaTest {
 
 	@Test
 	public void modificarPoiTest(){
+		
+	AdministradorDePoi administrador = new AdministradorDePoi();
 	
 	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
 	assertTrue(lista.size()==7);
@@ -423,33 +431,48 @@ public class MapaTest {
 	boolean aparicion2=false;
 	while(i.hasNext()){	
 		PuntoDeInteres n=i.next();
-		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
-		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
+		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
+		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
 	}
 
 	assertFalse(aparicion1);
 	assertTrue(aparicion2);
 	
-	//"modifico" poi.
-	//ver como va a funcionar este metodo modificar
+	int idAGuardar = 0;
+	PuntoDeInteres poiAMod;
+	
 	Iterator<PuntoDeInteres> j = lista.iterator();
 	while(j.hasNext()){	
-		PuntoDeInteres n=j.next();
-		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("Mala Atencion")) administrador.modificarPoi(n);;
+		poiAMod=j.next();
+		if (poiAMod.getNombre().equals("Sucursal 49")&&poiAMod.buscarCoincidencia("Mala Atencion")) idAGuardar=poiAMod.getId();
 	}
-	  
-
+	
+	/*
+	 * creo un nuevo poi con los cambios a realizar y le cambio el id para que sea igual al anterior 
+	 */
+	
+	Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+			.provincia("Ciudad de Buenos Aires").crearDireccion();
+			List<String> palabras=new ArrayList<String>();
+			palabras.add("No Coincidencia");
+	List<Servicio> servicios3=Servicio.getListaServicios("Depositos", "Extracciones");
+	PuntoDeInteres pdiNuevo=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
+	pdiNuevo.setId(idAGuardar);
+	
+	administrador.modificarPoi(pdiNuevo);
+	
 	Iterator<PuntoDeInteres> p = lista.iterator();
 	aparicion1=false;
 	aparicion2=false;
 	while(p.hasNext()){	
 		PuntoDeInteres n=i.next();
-		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
-		if (n.getNombre().equals("Sucursal 42")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
+		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
+		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
 	}
 
-	assertFalse(aparicion2);
 	assertTrue(aparicion1);
+	assertFalse(aparicion2);
+	
 	
 	}
 	
@@ -465,6 +488,8 @@ public class MapaTest {
 	@BeforeClass
 	public static void setUp(){
 		mapa=Mapa.getInstance() ;
+		
+		
 		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 		.provincia("Ciudad de Buenos Aires").crearDireccion();
