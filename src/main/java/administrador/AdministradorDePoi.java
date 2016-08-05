@@ -21,7 +21,7 @@ public class AdministradorDePoi {
 	}
 	
 	public List<PuntoDeInteres> busquedaDePuntosDeInteres(String x){
-		busquedaDePuntosDeInteres(x, false);
+		return busquedaDePuntosDeInteres(x, false);
 	}
 	
 	public List<PuntoDeInteres> busquedaDePuntosDeInteres(String x, boolean test){
@@ -48,11 +48,16 @@ public class AdministradorDePoi {
 			if (poi==null)
 				throw new PuntoDeInteresNoEncontradoException("Uno de los ids de la busqueda ya no se encuentra en memoria.");
 			lista.add(poi);
+		
 		}
 		return lista;
 	}
 	
 	private List<PuntoDeInteres> buscarEfectivamente(String x, boolean test){
 		return Mapa.getInstance().buscarPuntosDeInteres(x, test);
+	}
+	
+	private List<PuntoDeInteres> buscarEfectivamente(String x){
+		return Mapa.getInstance().buscarPuntosDeInteres(x, false);
 	}
 }

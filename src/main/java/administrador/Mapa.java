@@ -32,11 +32,21 @@ public class Mapa {
 	}
 	
 	public void agregarPunto(PuntoDeInteres punto){
-		puntos.add(punto);
+		puntos.add( punto);
 	}
 	
 	public PuntoDeInteres eliminarPunto(int id){
-		return puntos.remove(id);
+		
+		Iterator<PuntoDeInteres> i=puntos.iterator();
+		int c=0;
+		while (i.hasNext()){
+			PuntoDeInteres p=i.next();
+			if (p.getId()== id)
+				return puntos.remove(c);
+			c++;
+		}
+		return null;
+		
 	}
 	
 	public boolean esCercano(PuntoDeInteres punto, double latitud, double longitud, int comunaId){
@@ -65,12 +75,19 @@ public class Mapa {
 		return listaADevolver;
 	}
 	public List<PuntoDeInteres> buscarPuntosDeInteres(String x){
-		buscarPuntosDeInteres(x, false);
+		return buscarPuntosDeInteres(x, false);
 	}
 	
 	
 	public PuntoDeInteres obtenerPuntoDeInteres(int id){
-		return puntos.get(id);
+		
+		Iterator<PuntoDeInteres> pdi=puntos.iterator();
+		while (pdi.hasNext()){
+			PuntoDeInteres p=pdi.next();
+			if (p.getId()==id)
+				return p;
+		}
+		return null;
 	}
 	/**
 	 * Busca en las todas las fuentes de POI externas consultando la lista de adaptadores de fuentes externas.
@@ -84,7 +101,9 @@ public class Mapa {
 		while (i.hasNext()){
 			AdaptadorServicioExterno adaptador=i.next();
 			if (!test){
-				lista.addAll(adaptador.buscar(x));
+				List<PuntoDeInteres> ll=adaptador.buscar(x);
+				if (ll!=null)
+					lista.addAll(ll);
 			}else{
 				//llamar al mock
 			}

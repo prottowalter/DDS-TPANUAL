@@ -41,5 +41,32 @@ public class AdministradorDeBusquedasTest {
 				assertFalse( listaResultado.size() == 0);
 		
 	}
+	
+	
+	@Test
+	public void administradorDeBusquedasDeCgpTest() {
+		// TODO Auto-generated constructor stub
+		
+				//AdministradorDeBusquedas busqueda = AdministradorDeBusquedas.getInstance();
+		AdministradorDePoi punto = new AdministradorDePoi();
+				
+				//Creo la dirección
+		Direccion direccionCGP = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Miller").numero("2751").crearDireccion();
+		ArrayList<String> palabrasClave = new ArrayList<String>();
+		palabrasClave.add("CGP");
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil");
+			
+		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getCGP(-34.568574D, -58.482842D, "CGP 12", direccionCGP, palabrasClave, servicios, 12);
+		
+				
+				punto.agregarPoi(puntoFactory);
+				
+				List<PuntoDeInteres> listaResultado = punto.busquedaDePuntosDeInteres("CGP 12");
+				
+				
+				assertTrue( listaResultado.size() > 0);
+				assertFalse( listaResultado.size() == 0);
+		
+	}
 
 }

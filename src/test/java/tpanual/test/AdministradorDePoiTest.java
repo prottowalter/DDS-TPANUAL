@@ -7,16 +7,95 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import administrador.AdministradorDePoi;
 import administrador.Mapa;
+import tpanual.Rubro.RubroFW;
+import tpanual.Rubro.RubroFWFactory;
 import tpanual.factory.PuntoDeInteresFactory;
+import tpanual.main.Dias;
 import tpanual.main.Direccion;
+import tpanual.main.HorarioDeAtencion;
 import tpanual.main.Servicio;
 import tpanual.main.poi.PuntoDeInteres;
 
-public class AdministradorDePoisTest {
+public class AdministradorDePoiTest {
+
+	@BeforeClass
+	public static void setUp(){
+		mapa=Mapa.getInstance() ;
+		
+		
+		
+		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
+		.provincia("Ciudad de Buenos Aires").crearDireccion();
+		List<String> palabras=new ArrayList<String>();
+		palabras.add("Servicio de cafeteria");
+		palabras.add("Mala Atencion");
+		
+		List<String> palabras2=new ArrayList<String>();
+		palabras.add("CGP");
+		palabras.add("Zona peligrosa");
+		
+		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
+		List<Servicio> servicios2=Servicio.getListaServicios("Venta de chicles", "Asesoramiento legal");
+		List<Servicio> servicios3=Servicio.getListaServicios("Depositos", "Extracciones");
+		
+		RubroFW rubro1=RubroFWFactory.getRubro("Muebleria", 700);
+		RubroFW rubro2=RubroFWFactory.getRubro("Kiosko", 200);
+
+		servicios.get(0).setHorario(getHorario1());
+		servicios.get(1).setHorario(getHorario2());
+		servicios.get(2).setHorario(getHorario3());
+		servicios2.get(0).setHorario(getHorario3());
+		servicios2.get(1).setHorario(getHorario2());
+		
+		PuntoDeInteres pdi=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras2, servicios, 25);
+		PuntoDeInteres pdi2=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 2", direccion, palabras2, servicios2, 25);
+		PuntoDeInteres pdi3=PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Parada de la linea ciento catorce", direccion, palabras2, "114");
+		PuntoDeInteres pdi4=PuntoDeInteresFactory.getLocalComercial(-50D, 3000D, "Muebleria los dos hermanos", direccion, palabras2, rubro1);
+		PuntoDeInteres pdi5=PuntoDeInteresFactory.getLocalComercial(-5D, 3001D, "Muebleria somos la contra de los dos hermanos", direccion, palabras, rubro1);
+		PuntoDeInteres pdi6=PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Kiosko no se fia ni al cura parroco", direccion, palabras2, rubro2);
+		PuntoDeInteres pdi7=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
+		
+		
+		mapa.agregarPunto(pdi);
+		mapa.agregarPunto(pdi2);
+		mapa.agregarPunto(pdi3);
+		mapa.agregarPunto(pdi4);
+		mapa.agregarPunto(pdi5);
+		mapa.agregarPunto(pdi6);
+		mapa.agregarPunto(pdi7);
+		
+	}
+	private static HorarioDeAtencion getHorario1(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO && dia != Dias.SABADO)
+				horario.addRangoDia(800, 1700, dia);
+		}
+		return horario;
+	}
+
+	private static HorarioDeAtencion getHorario2(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO)
+				horario.addRangoDia(1000, 1600, dia);
+		}
+		return horario;
+	}
+	
+	private static HorarioDeAtencion getHorario3(){
+		HorarioDeAtencion horario = new HorarioDeAtencion();
+		for (Dias dia : Dias.values()) {
+			if (dia != Dias.DOMINGO && dia != Dias.SABADO && dia != Dias.LUNES)
+				horario.addRangoDia(1200, 2000, dia);
+		}
+		return horario;
+	}
 
 	//public AdministradorDePoisTest() {
 		// TODO Auto-generated constructor stub
@@ -26,42 +105,8 @@ public class AdministradorDePoisTest {
 	 * ABMC entrega 2
 	 * Revisar luego de que se completen los metodos, recordar crear el admin
 	 */
-	Mapa mapa=Mapa.getInstance() ;
+	static Mapa mapa=Mapa.getInstance() ;
 	
-	@Test
-	public void eliminarPoiTest(){
-	AdministradorDePoi administrador = new AdministradorDePoi();
-	
-	List<PuntoDeInteres> lista= mapa.buscarPuntosDeInteres("");
-	assertTrue(lista.size()==7);
-	
-	Iterator<PuntoDeInteres> i = lista.iterator();
-	boolean aparicion1=false;
-	while(i.hasNext()){	
-		PuntoDeInteres n=i.next();
-		if (n.getNombre().equals("Sucursal 49")) aparicion1=true;
-	}
-	
-	assertTrue(aparicion1);
-	
-	lista.clear();
-	
-	lista=mapa.buscarPuntosDeInteres("Sucursal 49");
-	
-	i = lista.iterator();
-	while(i.hasNext()){	
-		PuntoDeInteres n=i.next();
-		administrador.eliminarPoi(n); 
-	}
-	
-	lista.clear();
-	lista=mapa.buscarPuntosDeInteres("Sucursal 49");
-	assertTrue(lista.size()==0);
-	
-	lista=mapa.buscarPuntosDeInteres("");
-	assertTrue(lista.size()==6);
-	
-	}
 	
 
 	
@@ -72,7 +117,7 @@ public class AdministradorDePoisTest {
 	AdministradorDePoi administrador = new AdministradorDePoi();
 		
 	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
-	assertTrue(lista.size()==7);
+	
 	
 	Iterator<PuntoDeInteres> i = lista.iterator();
 	boolean aparicion1=false;
@@ -95,14 +140,15 @@ public class AdministradorDePoisTest {
 	administrador.agregarPoi(pdiAAgregar);
 	
 	lista=mapa.buscarPuntosDeInteres("");
-	assertTrue(lista.size()==8);
 	
 	Iterator<PuntoDeInteres> j = lista.iterator();
 	aparicion1=false;
 	while(j.hasNext()){	
 		PuntoDeInteres n=j.next();
 		if (n.getNombre().equals("Sucursal 42")) aparicion1=true;
-		}
+	}
+	
+	assertTrue(aparicion1);
 
 	}
 	
@@ -114,7 +160,7 @@ public class AdministradorDePoisTest {
 	AdministradorDePoi administrador = new AdministradorDePoi();
 	
 	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
-	assertTrue(lista.size()==7);
+	
 	
 	Iterator<PuntoDeInteres> i = lista.iterator();
 	boolean aparicion1=false;
@@ -147,7 +193,7 @@ public class AdministradorDePoisTest {
 			palabras.add("No Coincidencia");
 	List<Servicio> servicios3=Servicio.getListaServicios("Depositos", "Extracciones");
 	PuntoDeInteres pdiNuevo=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
-	//pdiNuevo.setId(idAGuardar);
+	pdiNuevo.setId(idAGuardar);
 	
 	administrador.modificarPoi(pdiNuevo);
 	
@@ -155,15 +201,54 @@ public class AdministradorDePoisTest {
 	aparicion1=false;
 	aparicion2=false;
 	while(p.hasNext()){	
-		PuntoDeInteres n=i.next();
+		PuntoDeInteres n=p.next();
 		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
 		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
 	}
 
-	assertTrue(aparicion1);
-	assertFalse(aparicion2);
+	assertFalse(aparicion1);
+	assertTrue(aparicion2);
 	
 	
+	}
+	@Test
+	public void eliminarPoiTest(){
+		AdministradorDePoi administrador = new AdministradorDePoi();
+		
+		List<PuntoDeInteres> lista= mapa.buscarPuntosDeInteres("");
+		
+		System.out.println(lista.size());
+
+		
+		Iterator<PuntoDeInteres> i = lista.iterator();
+		boolean aparicion1=false;
+		while(i.hasNext()){	
+			PuntoDeInteres n=i.next();
+			if (n.getNombre().equals("GCP Comuna 1")) aparicion1=true;
+		}
+		
+		assertTrue(aparicion1);
+		
+		lista.clear();
+		
+		lista=mapa.buscarPuntosDeInteres("GCP Comuna 1");
+		
+		i = lista.iterator();
+		while(i.hasNext()){	
+			PuntoDeInteres n=i.next();
+			administrador.eliminarPoi(n); 
+		}
+		
+		lista.clear();
+		lista=mapa.buscarPuntosDeInteres("GCP Comuna 1");
+		
+		assertTrue(lista.size()==0);
+		
+		
+		
+		
+		
+		
 	}
 	
 
