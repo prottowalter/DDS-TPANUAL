@@ -57,6 +57,8 @@ public class PuntoDeInteres {
 		return this.latitud + "," + this.longitud;
 	}
 	
+
+	
 	public boolean cercanoA(double unaLatitud, double unaLongitud, int comunaId){
 		
 		return this.tipo.cercanoEntre(this.latitud, this.longitud, unaLatitud, unaLongitud, comunaId);

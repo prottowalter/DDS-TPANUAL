@@ -31,11 +31,11 @@ public class Mapa {
 		adaptadores.add(new AdaptadorServicioExternoCGP());
 	}
 	
-	public void agregarPunto(PuntoDeInteres punto){
+	void agregarPunto(PuntoDeInteres punto){
 		puntos.add( punto);
 	}
 	
-	public PuntoDeInteres eliminarPunto(int id){
+	PuntoDeInteres eliminarPunto(int id){
 		
 		Iterator<PuntoDeInteres> i=puntos.iterator();
 		int c=0;
@@ -49,20 +49,12 @@ public class Mapa {
 		
 	}
 	
-	public boolean esCercano(PuntoDeInteres punto, double latitud, double longitud, int comunaId){
-		
-		return (punto.cercanoA(latitud,longitud,comunaId));
 
-	}
-	
-	public boolean estaDisponible(PuntoDeInteres punto, Dias dia, int hora, String x){
-		  return punto.estaDisponible(dia, hora , x);
-	}
 	
 	/**
 	 * Recibe un texto libre, busca en los puntos de interes almacenados en el mapa, aquellos que cumplan coincidencia con el texto y los devuelve.
 	 */
-	public List<PuntoDeInteres> buscarPuntosDeInteres(String x, boolean test){
+	List<PuntoDeInteres> buscarPuntosDeInteres(String x, boolean test){
 		List<PuntoDeInteres> listaADevolver=new ArrayList<PuntoDeInteres>();
 		Iterator<PuntoDeInteres> it=puntos.iterator();
 		while (it.hasNext()){
@@ -74,12 +66,12 @@ public class Mapa {
 		listaADevolver.addAll(listaExterna);
 		return listaADevolver;
 	}
-	public List<PuntoDeInteres> buscarPuntosDeInteres(String x){
+	List<PuntoDeInteres> buscarPuntosDeInteres(String x){
 		return buscarPuntosDeInteres(x, false);
 	}
 	
 	
-	public PuntoDeInteres obtenerPuntoDeInteres(int id){
+	PuntoDeInteres obtenerPuntoDeInteres(int id){
 		
 		Iterator<PuntoDeInteres> pdi=puntos.iterator();
 		while (pdi.hasNext()){
