@@ -25,9 +25,9 @@ public class AdministradorDePoiTest {
 
 	@BeforeClass
 	public static void setUp(){
-		mapa=Mapa.getInstance() ;
+		//mapa=Mapa.getInstance() ;
 		
-		
+		AdministradorDePoi puntoAdminSetUp = new AdministradorDePoi();
 		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 		.provincia("Ciudad de Buenos Aires").crearDireccion();
@@ -60,15 +60,14 @@ public class AdministradorDePoiTest {
 		PuntoDeInteres pdi6=PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Kiosko no se fia ni al cura parroco", direccion, palabras2, rubro2);
 		PuntoDeInteres pdi7=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
 		
-		
-		mapa.agregarPunto(pdi);
-		mapa.agregarPunto(pdi2);
-		mapa.agregarPunto(pdi3);
-		mapa.agregarPunto(pdi4);
-		mapa.agregarPunto(pdi5);
-		mapa.agregarPunto(pdi6);
-		mapa.agregarPunto(pdi7);
-		
+		puntoAdminSetUp.agregarPoi(pdi);
+		puntoAdminSetUp.agregarPoi(pdi2);
+		puntoAdminSetUp.agregarPoi(pdi3);
+		puntoAdminSetUp.agregarPoi(pdi4);
+		puntoAdminSetUp.agregarPoi(pdi5);
+		puntoAdminSetUp.agregarPoi(pdi6);
+		puntoAdminSetUp.agregarPoi(pdi7);
+			
 	}
 	private static HorarioDeAtencion getHorario1(){
 		HorarioDeAtencion horario = new HorarioDeAtencion();
@@ -116,7 +115,7 @@ public class AdministradorDePoiTest {
 		
 	AdministradorDePoi administrador = new AdministradorDePoi();
 		
-	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
+	List<PuntoDeInteres> lista=administrador.busquedaDePuntosDeInteres("");
 	
 	
 	Iterator<PuntoDeInteres> i = lista.iterator();
@@ -139,7 +138,7 @@ public class AdministradorDePoiTest {
 	
 	administrador.agregarPoi(pdiAAgregar);
 	
-	lista=mapa.buscarPuntosDeInteres("");
+	lista=administrador.busquedaDePuntosDeInteres("");
 	
 	Iterator<PuntoDeInteres> j = lista.iterator();
 	aparicion1=false;
@@ -159,7 +158,7 @@ public class AdministradorDePoiTest {
 		
 	AdministradorDePoi administrador = new AdministradorDePoi();
 	
-	List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres("");
+	List<PuntoDeInteres> lista=administrador.busquedaDePuntosDeInteres("");
 	
 	
 	Iterator<PuntoDeInteres> i = lista.iterator();
@@ -215,7 +214,7 @@ public class AdministradorDePoiTest {
 	public void eliminarPoiTest(){
 		AdministradorDePoi administrador = new AdministradorDePoi();
 		
-		List<PuntoDeInteres> lista= mapa.buscarPuntosDeInteres("");
+		List<PuntoDeInteres> lista= administrador.busquedaDePuntosDeInteres("");
 		
 		System.out.println(lista.size());
 
@@ -231,7 +230,7 @@ public class AdministradorDePoiTest {
 		
 		lista.clear();
 		
-		lista=mapa.buscarPuntosDeInteres("GCP Comuna 1");
+		lista=administrador.busquedaDePuntosDeInteres("GCP Comuna 1");
 		
 		i = lista.iterator();
 		while(i.hasNext()){	
@@ -240,14 +239,9 @@ public class AdministradorDePoiTest {
 		}
 		
 		lista.clear();
-		lista=mapa.buscarPuntosDeInteres("GCP Comuna 1");
+		lista=administrador.busquedaDePuntosDeInteres("GCP Comuna 1");
 		
 		assertTrue(lista.size()==0);
-		
-		
-		
-		
-		
 		
 	}
 	
