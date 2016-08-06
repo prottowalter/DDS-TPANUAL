@@ -215,8 +215,6 @@ public class AdministradorDePoiTest {
 		AdministradorDePoi administrador = new AdministradorDePoi();
 		
 		List<PuntoDeInteres> lista= administrador.busquedaDePuntosDeInteres("");
-		
-		System.out.println(lista.size());
 
 		
 		Iterator<PuntoDeInteres> i = lista.iterator();

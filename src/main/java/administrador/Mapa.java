@@ -1,8 +1,10 @@
 package administrador;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import administrador.adaptadores.AdaptadorServicioExterno;
 import administrador.adaptadores.AdaptadorServicioExternoBancos;
@@ -13,7 +15,7 @@ import tpanual.main.poi.PuntoDeInteres;
 
 public class Mapa {
 	
-	private List<PuntoDeInteres> puntos;
+	private Map<Integer, PuntoDeInteres> puntos;
 	private List<AdaptadorServicioExterno> adaptadores;
 
 	private static Mapa instance;
@@ -25,27 +27,19 @@ public class Mapa {
 	}
 	
 	private Mapa() {
-		puntos=new ArrayList<PuntoDeInteres>();
+		puntos=new HashMap<Integer, PuntoDeInteres>();
 		adaptadores=new ArrayList<AdaptadorServicioExterno>();
 		adaptadores.add(new AdaptadorServicioExternoBancos());
 		adaptadores.add(new AdaptadorServicioExternoCGP());
 	}
 	
 	void agregarPunto(PuntoDeInteres punto){
-		puntos.add( punto);
+		puntos.put(punto.getId(),  punto);
 	}
 	
-	PuntoDeInteres eliminarPunto(int id){
+	PuntoDeInteres eliminarPunto(Integer id){
 		
-		Iterator<PuntoDeInteres> i=puntos.iterator();
-		int c=0;
-		while (i.hasNext()){
-			PuntoDeInteres p=i.next();
-			if (p.getId()== id)
-				return puntos.remove(c);
-			c++;
-		}
-		return null;
+		return puntos.remove(id);
 		
 	}
 	
@@ -53,10 +47,12 @@ public class Mapa {
 	
 	/**
 	 * Recibe un texto libre, busca en los puntos de interes almacenados en el mapa, aquellos que cumplan coincidencia con el texto y los devuelve.
+	 * @param x: String a buscar
+	 * @test: false para buscar en servicios externos, true para buscar en mock
 	 */
 	List<PuntoDeInteres> buscarPuntosDeInteres(String x, boolean test){
 		List<PuntoDeInteres> listaADevolver=new ArrayList<PuntoDeInteres>();
-		Iterator<PuntoDeInteres> it=puntos.iterator();
+		Iterator<PuntoDeInteres> it=puntos.values().iterator();
 		while (it.hasNext()){
 			PuntoDeInteres punto=it.next();
 			if (punto.buscarCoincidencia(x)) listaADevolver.add(punto);
@@ -70,16 +66,15 @@ public class Mapa {
 		return buscarPuntosDeInteres(x, false);
 	}
 	
+	/**
+	 * Obtiene un PuntoDeInteres accediendo solo por id sin buscar
+	 * @param id
+	 * @return: null si no encuentra ninguno
+	 */
 	
-	PuntoDeInteres obtenerPuntoDeInteres(int id){
+	PuntoDeInteres obtenerPuntoDeInteres(Integer id){
 		
-		Iterator<PuntoDeInteres> pdi=puntos.iterator();
-		while (pdi.hasNext()){
-			PuntoDeInteres p=pdi.next();
-			if (p.getId()==id)
-				return p;
-		}
-		return null;
+		return puntos.get(id);
 	}
 	/**
 	 * Busca en las todas las fuentes de POI externas consultando la lista de adaptadores de fuentes externas.

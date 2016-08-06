@@ -60,4 +60,9 @@ public class AdministradorDePoi {
 	private List<PuntoDeInteres> buscarEfectivamente(String x){
 		return Mapa.getInstance().buscarPuntosDeInteres(x, false);
 	}
+	
+	public List<PuntoDeInteres> buscarBancos(String banco, String servicio){
+		
+	}
+	
 }

@@ -10,7 +10,7 @@ import tpanual.main.Direccion;
 import tpanual.utilitarios.Utilitarios;
 
 public class PuntoDeInteres {
-	private int id;
+	private Integer id;
 	private double latitud;
 	private double longitud;
 	private String nombre;
@@ -75,7 +75,7 @@ public class PuntoDeInteres {
 		return tipo.estaDisponible(dia, hora, x);
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
@@ -148,6 +148,19 @@ public class PuntoDeInteres {
 			
 		}
 		return true;
+	}
+	
+	public boolean equals(Object o){
+		if (!(o instanceof PuntoDeInteres))
+			return false;
+		else{
+			PuntoDeInteres pdi=(PuntoDeInteres) o;
+			if (pdi.getId().equals(this.id))
+				return true;
+			else
+				return false;
+		}
+
 	}
 
 }
