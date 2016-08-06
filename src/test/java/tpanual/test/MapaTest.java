@@ -25,12 +25,14 @@ public class MapaTest {
 	@Test
 	public void buscarParadaDeColectivoTest(){
 		
+		AdministradorDePoi puntoAdmin = new AdministradorDePoi();
+		
 		/**
 		 * Esta linea de colectivo esta en la lista de puntos de interes
 		 */
 		String criterio="114";
 		
-		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
+		List<PuntoDeInteres> lista=puntoAdmin.busquedaDePuntosDeInteres(criterio);
 		Iterator<PuntoDeInteres> i = lista.iterator();
 		
 		boolean aparicion=false;		
@@ -47,8 +49,8 @@ public class MapaTest {
 		 */		
 		
 		criterio="113";
-		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
-		
+				
+		List<PuntoDeInteres> lista2=puntoAdmin.busquedaDePuntosDeInteres(criterio);
 		assertTrue(lista2.isEmpty());		
 	}
 	
@@ -56,12 +58,15 @@ public class MapaTest {
 
 	public void buscarLocalesPorRubroTest(){
 		
+		AdministradorDePoi puntoAdmin = new AdministradorDePoi();
+		
 		/**
 		 * Busco en minuscula, deberia encontrar aunque este en mayúscula en el punto de interes
 		 */
 		String criterio="muebleria";
 		
-		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
+		List<PuntoDeInteres> lista=puntoAdmin.busquedaDePuntosDeInteres(criterio);
+				
 		Iterator<PuntoDeInteres> i = lista.iterator();
 		
 		boolean aparicion1=false;
@@ -81,18 +86,20 @@ public class MapaTest {
 		 */		
 		
 		criterio="panaderia";
-		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
-		
+		List<PuntoDeInteres> lista2=puntoAdmin.busquedaDePuntosDeInteres(criterio);
+				
 		assertTrue(lista2.isEmpty());		
 	}	
 
 	@Test
 	public void buscarPalabrasClaveTest(){
 		
+		AdministradorDePoi puntoAdmin = new AdministradorDePoi();
+		
 		String criterio="mala atencion";
 		
-		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
-		
+		List<PuntoDeInteres> lista=puntoAdmin.busquedaDePuntosDeInteres(criterio);
+				
 		assertTrue(lista.size()==2);
 		
 		Iterator<PuntoDeInteres> i = lista.iterator();
@@ -109,17 +116,19 @@ public class MapaTest {
 		assertTrue(aparicion1 && aparicion2);
 		
 		criterio="una palabra clave que no esta";
-		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
-		
+		List<PuntoDeInteres> lista2=puntoAdmin.busquedaDePuntosDeInteres(criterio);
+				
 		assertTrue(lista2.isEmpty());		
 	}	
 	@Test
 	public void buscarServicios(){
 		
+		AdministradorDePoi puntoAdmin = new AdministradorDePoi();
+		
 		String criterio="Denuncias";
 		
-		List<PuntoDeInteres> lista=mapa.buscarPuntosDeInteres(criterio);
-		
+		List<PuntoDeInteres> lista=puntoAdmin.busquedaDePuntosDeInteres(criterio);
+				
 		assertTrue(lista.size()==1);
 		
 		Iterator<PuntoDeInteres> i = lista.iterator();
@@ -134,15 +143,15 @@ public class MapaTest {
 		assertTrue(aparicion1);
 		
 		criterio="Un servicio que no existe";
-		List<PuntoDeInteres> lista2=mapa.buscarPuntosDeInteres(criterio);		
-		
+		List<PuntoDeInteres> lista2=puntoAdmin.busquedaDePuntosDeInteres(criterio);
+				
 		assertTrue(lista2.isEmpty());		
 	}	
 		
 	
 	@Test
 	public void cercaniaCgpTest(){
-		Mapa mapa = Mapa.getInstance();
+		
 		//Creo la dirección
 		Direccion direccionCGP = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Miller").numero("2751").crearDireccion();
 		ArrayList<String> palabrasClave = new ArrayList<String>();
@@ -151,14 +160,13 @@ public class MapaTest {
 		
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getCGP(-34.568574D, -58.482842D, "CGP 12", direccionCGP, palabrasClave, servicios, 12);
 				
-		assertTrue(mapa.esCercano(puntoFactory, -34.571896D, -58.490224D, 12));
-		
-		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
+		assertTrue(puntoFactory.cercanoA(-34.571896D, -58.490224D, 12));
+		assertFalse(puntoFactory.cercanoA(-34.578546D, -58.469453D, 15));
 	}
 
 	@Test
 	public void cercaniaAUnaParadaTest(){
-		Mapa mapa = Mapa.getInstance();
+		
 		//Creo la dirección
 		Direccion direccionDeLaParada = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("DR. Ignacio Rivera").numero("1889").crearDireccion();
 		ArrayList<String> palabrasClave = new ArrayList<String>();
@@ -166,13 +174,13 @@ public class MapaTest {
 		
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getParadaDeColectivo(-34.572426D, -58.489022D,"Parada Lú‹ea 176", direccionDeLaParada, palabrasClave, "176");
 				
-		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
-		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
+		assertTrue(puntoFactory.cercanoA(-34.572713D, -58.488448D, 12));
+		assertFalse(puntoFactory.cercanoA(34.578546D, -58.469453D, 15));
 	}
 
 	@Test
 	public void cercaniaALibreriaEscolarTest(){
-		Mapa mapa = Mapa.getInstance();
+		
 		//Creo la dirección
 		Direccion direccionDeLaLibreria = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5389").crearDireccion();
 		ArrayList<String> palabrasClave = new ArrayList<String>();
@@ -181,13 +189,13 @@ public class MapaTest {
 		RubroFW rubro = RubroFWFactory.getRubro("Libreria Escolar", 500);
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.569553D, -58.492019D, "Lo de Tony", direccionDeLaLibreria, palabrasClave, rubro);
 		
-		assertTrue(mapa.esCercano(puntoFactory, -34.572713D, -58.488448D, 12));
-		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
+		assertTrue(puntoFactory.cercanoA(-34.572713D, -58.488448D, 12));
+		assertFalse(puntoFactory.cercanoA(-34.578546D, -58.469453D, 15));
 	}
 	
 	@Test
 	public void cercaniaKioskoTest(){
-		Mapa mapa = Mapa.getInstance();
+		
 		//Creo la dirección
 		Direccion direccionDelKiosko = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5389").crearDireccion();
 		ArrayList<String> palabrasClave = new ArrayList<String>();
@@ -196,17 +204,16 @@ public class MapaTest {
 		RubroFW rubro=RubroFWFactory.getRubro("Kiosko",  200);
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getLocalComercial(-34.573119D, -58.489301D, "Lo + Pancho", direccionDelKiosko, palabrasClave, rubro);
 		
-		assertTrue(mapa.esCercano(puntoFactory, -34.573001D, -58.490937D, 12));
-		assertFalse(mapa.esCercano(puntoFactory, -34.578546D, -58.469453D, 15));
+		assertTrue(puntoFactory.cercanoA(-34.573001D, -58.490937D, 12));
+		assertFalse(puntoFactory.cercanoA(-34.578546D, -58.469453D, 15));
 	}
 	
 	
 	//para libreria 
-	//assertFalse(mapa.esCercano(puntoFactory, -34.574647D, -58.485889D, 12));
-	
+		
 	@Test
 	public void disponibilidadParadaColectivoTodoElDiaDomingoTest(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -214,13 +221,13 @@ public class MapaTest {
 		PuntoDeInteres paradaDeColectivo = PuntoDeInteresFactory.getParadaDeColectivo(600, 1200, "Parada de la linea ciento catorce", direccion, palabras, "114");
 		
 		for (int hora=0000;hora<2400;hora=hora+30)
-			assertTrue(mapa.estaDisponible(paradaDeColectivo, Dias.DOMINGO, hora, ""));
+			assertTrue(paradaDeColectivo.estaDisponible(Dias.DOMINGO, hora, ""));
 		
 	}
 	
 	@Test
 	public void disponibilidadSucursalDeBancoDiaLunesALas1300Test(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -228,13 +235,13 @@ public class MapaTest {
 		
 		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
 		
-		assertTrue(mapa.estaDisponible(sucursalDeBanco, Dias.LUNES, 1300, ""));
+		assertTrue(sucursalDeBanco.estaDisponible(Dias.LUNES, 1300, ""));
 		
 	}
 	
 	@Test
 	public void disponibilidadSucursalDeBancoDiaViernesALas2200Test(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -242,13 +249,13 @@ public class MapaTest {
 		
 		PuntoDeInteres sucursalDeBanco=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
 		
-		assertFalse(mapa.estaDisponible(sucursalDeBanco, Dias.SABADO, 2200, ""));
+		assertFalse(sucursalDeBanco.estaDisponible(Dias.SABADO, 2200, ""));
 		
 	}
 	
 	@Test
 	public void disponibilidadCarrouselDiaJuevesALas1730Test(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -256,13 +263,13 @@ public class MapaTest {
 		RubroFW rubroCarrousel=RubroFWFactory.getRubro("Carrousel", 200);
 		PuntoDeInteres carrousel = PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Calesita", direccion, palabras, rubroCarrousel);
 		
-		assertTrue(mapa.estaDisponible(carrousel, Dias.JUEVES, 1730, ""));
+		assertTrue(carrousel.estaDisponible(Dias.JUEVES, 1730, ""));
 		
 	}
 	
 	@Test
 	public void disponibilidadCarrouselDiaMartesALas1500Test(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -270,13 +277,13 @@ public class MapaTest {
 		RubroFW rubroCarrousel=RubroFWFactory.getRubro("Carrousel", 200);
 		PuntoDeInteres carrousel = PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Calesita", direccion, palabras, rubroCarrousel);
 		
-		assertFalse(mapa.estaDisponible(carrousel, Dias.MARTES, 1500, ""));
+		assertFalse(carrousel.estaDisponible(Dias.MARTES, 1500, ""));
 		
 	}
 	
 	@Test
 	public void disponibilidadServicioDenunciasDiaMiercolesALas1100Test(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -288,13 +295,13 @@ public class MapaTest {
 		
 		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
 		
-		assertTrue(mapa.estaDisponible(cgp, Dias.MARTES, 1100, "denuncias"));
+		assertTrue(cgp.estaDisponible(Dias.MARTES, 1100, "denuncias"));
 		
 	}
 	
 	@Test
 	public void disponibilidadDeAlgunServicioDiaLunesALas0900Test(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -306,13 +313,13 @@ public class MapaTest {
 		
 		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
 		
-		assertTrue(mapa.estaDisponible(cgp, Dias.LUNES, 900, ""));
+		assertTrue(cgp.estaDisponible(Dias.LUNES, 900, ""));
 		
 	}
 	
 	@Test
 	public void disponibilidadDeNingunServicioDiaDomingoALas0900Test(){
-		Mapa mapa = Mapa.getInstance();
+		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 				.provincia("Ciudad de Buenos Aires").crearDireccion();
 		List<String> palabras=new ArrayList<String>();
@@ -324,23 +331,19 @@ public class MapaTest {
 		
 		PuntoDeInteres cgp=PuntoDeInteresFactory.getCGP(2500D, 3200D, "GCP Comuna 1", direccion, palabras, servicios, 25);
 		
-		assertFalse(mapa.estaDisponible(cgp, Dias.DOMINGO, 900, ""));
+		assertFalse(cgp.estaDisponible(Dias.DOMINGO, 900, ""));
 		
 	}
-	
-	
-
-	
-	
-		/**
+		
+	/**
 	 * Este metodo deberia ser usado por los demas test para que este centralizado la creacion del Mapa con puntos adentro
 	 * @return
 	 */
 	
 	@BeforeClass
 	public static void setUp(){
-		mapa=Mapa.getInstance() ;
 		
+		AdministradorDePoi puntoAdminSetUp = new AdministradorDePoi();
 		
 		
 		Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
@@ -374,14 +377,13 @@ public class MapaTest {
 		PuntoDeInteres pdi6=PuntoDeInteresFactory.getLocalComercial(-654D, 1286D, "Kiosko no se fia ni al cura parroco", direccion, palabras2, rubro2);
 		PuntoDeInteres pdi7=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
 		
-		
-		mapa.agregarPunto(pdi);
-		mapa.agregarPunto(pdi2);
-		mapa.agregarPunto(pdi3);
-		mapa.agregarPunto(pdi4);
-		mapa.agregarPunto(pdi5);
-		mapa.agregarPunto(pdi6);
-		mapa.agregarPunto(pdi7);
+		puntoAdminSetUp.agregarPoi(pdi);
+		puntoAdminSetUp.agregarPoi(pdi2);
+		puntoAdminSetUp.agregarPoi(pdi3);
+		puntoAdminSetUp.agregarPoi(pdi4);
+		puntoAdminSetUp.agregarPoi(pdi5);
+		puntoAdminSetUp.agregarPoi(pdi6);
+		puntoAdminSetUp.agregarPoi(pdi7);
 		
 	}
 	
