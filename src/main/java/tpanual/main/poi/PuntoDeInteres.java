@@ -134,8 +134,9 @@ public class PuntoDeInteres {
 				Field f=clase.getDeclaredField(fieldsModificables[a]);
 				Object s1=f.get(poi);
 				Object s2=f.get(this);
-				if (s1.equals(s2))
-					f.set(this, s2);
+				if (!s1.equals(s2))
+					f.set(this, s1);
+				
 			}catch(NoSuchFieldException nsfe){
 				nsfe.printStackTrace();
 				System.out.println("Error, no existe el field " + fieldsModificables[a] + " en la clase " + clase.getCanonicalName());

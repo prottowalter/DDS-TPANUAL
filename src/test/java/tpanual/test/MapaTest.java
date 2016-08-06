@@ -353,8 +353,8 @@ public class MapaTest {
 		palabras.add("Mala Atencion");
 		
 		List<String> palabras2=new ArrayList<String>();
-		palabras.add("CGP");
-		palabras.add("Zona peligrosa");
+		palabras2.add("CGP");
+		palabras2.add("Zona peligrosa");
 		
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
 		List<Servicio> servicios2=Servicio.getListaServicios("Venta de chicles", "Asesoramiento legal");
