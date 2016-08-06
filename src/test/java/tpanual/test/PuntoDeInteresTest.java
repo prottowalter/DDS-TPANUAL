@@ -19,7 +19,6 @@ public class PuntoDeInteresTest {
 
 	@Test
 	public void puntoCercanoACoordenadaTest(){
-		Mapa mapa = Mapa.getInstance();
 		//Creo la dirección
 		Direccion direccionDeLaSucursal= new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5201").crearDireccion();
 		ArrayList<String> palabrasClave = new ArrayList<String>();
@@ -28,8 +27,8 @@ public class PuntoDeInteresTest {
 		
 		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getSucursal(-34.573001D, -58.490937D, "Banco Francés", direccionDeLaSucursal, palabrasClave, servicios);
 								
-		assertFalse(mapa.esCercano(puntoFactory, -34.568459D, -58.486106D, 12));
-		assertTrue(mapa.esCercano(puntoFactory, -34.570581D, -58.489611D, 12));
+		assertFalse(puntoFactory.cercanoA(-34.568459D, -58.486106D, 12));
+		assertTrue(puntoFactory.cercanoA(-34.570581D, -58.489611D, 12));
 	}
 	
 	@Test
