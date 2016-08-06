@@ -36,8 +36,8 @@ public class AdministradorDePoiTest {
 		palabras.add("Mala Atencion");
 		
 		List<String> palabras2=new ArrayList<String>();
-		palabras.add("CGP");
-		palabras.add("Zona peligrosa");
+		palabras2.add("CGP");
+		palabras2.add("Zona peligrosa");
 		
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil", "Denuncias", "Pensiones");
 		List<Servicio> servicios2=Servicio.getListaServicios("Venta de chicles", "Asesoramiento legal");
@@ -102,12 +102,8 @@ public class AdministradorDePoiTest {
 	
 	/*
 	 * ABMC entrega 2
-	 * Revisar luego de que se completen los metodos, recordar crear el admin
 	 */
 	static Mapa mapa=Mapa.getInstance() ;
-	
-	
-
 	
 	
 	@Test
@@ -166,12 +162,13 @@ public class AdministradorDePoiTest {
 	boolean aparicion2=false;
 	while(i.hasNext()){	
 		PuntoDeInteres n=i.next();
-		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
-		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
+		if (n.getNombre().equals("Muebleria los dos hermanos")&&n.buscarCoincidencia("Zona peligrosa")) aparicion1=true;
+		if (n.getNombre().equals("Muebleria los dos hermanos")&&n.buscarCoincidencia("Zona segura")) aparicion2=true;
 	}
 
-	assertFalse(aparicion1);
-	assertTrue(aparicion2);
+	assertTrue(aparicion1);
+	assertFalse(aparicion2);
+	
 	
 	int idAGuardar = 0;
 	PuntoDeInteres poiAMod;
@@ -179,7 +176,7 @@ public class AdministradorDePoiTest {
 	Iterator<PuntoDeInteres> j = lista.iterator();
 	while(j.hasNext()){	
 		poiAMod=j.next();
-		if (poiAMod.getNombre().equals("Sucursal 49")&&poiAMod.buscarCoincidencia("Mala Atencion")) idAGuardar=poiAMod.getId();
+		if (poiAMod.getNombre().equals("Muebleria los dos hermanos")&&poiAMod.buscarCoincidencia("Zona peligrosa")) idAGuardar=poiAMod.getId();
 	}
 	
 	/*
@@ -188,26 +185,28 @@ public class AdministradorDePoiTest {
 	
 	Direccion direccion=new Direccion.DireccionBuilder().callePrincipal("Pueyrredon").numero("545").barrio("Once").codigoPostal("1701").pais("Argentina")
 			.provincia("Ciudad de Buenos Aires").crearDireccion();
-			List<String> palabras=new ArrayList<String>();
-			palabras.add("No Coincidencia");
-	List<Servicio> servicios3=Servicio.getListaServicios("Depositos", "Extracciones");
-	PuntoDeInteres pdiNuevo=PuntoDeInteresFactory.getSucursal(-600D, 1023589D, "Sucursal 49", direccion, palabras, servicios3);
+			List<String> palabrasNuevas=new ArrayList<String>();
+			palabrasNuevas.add("Zona segura");
+			RubroFW rubro1=RubroFWFactory.getRubro("Muebleria", 700);
+	PuntoDeInteres pdiNuevo=PuntoDeInteresFactory.getLocalComercial(-600D, 1023589D, "Muebleria los dos hermanos", direccion, palabrasNuevas, rubro1);
 	pdiNuevo.setId(idAGuardar);
 	
 	administrador.modificarPoi(pdiNuevo);
+	
+	lista=administrador.busquedaDePuntosDeInteres("");
 	
 	Iterator<PuntoDeInteres> p = lista.iterator();
 	aparicion1=false;
 	aparicion2=false;
 	while(p.hasNext()){	
 		PuntoDeInteres n=p.next();
-		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("No Coincidencia")) aparicion1=true;
-		if (n.getNombre().equals("Sucursal 49")&&n.buscarCoincidencia("Mala Atencion")) aparicion2=true;
+		if (n.getNombre().equals("Muebleria los dos hermanos")&&n.buscarCoincidencia("Zona peligrosa")) aparicion1=true;
+		if (n.getNombre().equals("Muebleria los dos hermanos")&&n.buscarCoincidencia("Zona segura")) aparicion2=true;
 	}
 
 	assertFalse(aparicion1);
 	assertTrue(aparicion2);
-	
+		
 	
 	}
 	@Test
