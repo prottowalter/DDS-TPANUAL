@@ -1,6 +1,7 @@
 package administrador;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -26,7 +27,7 @@ public class AdministradorDeBusquedas {
 		return instance;
 	}
 	
-	public Busqueda getBusquedaAnterior(String x){
+	public Busqueda getBusquedaAnterior(String[] x){
 		Iterator<Busqueda> it = busquedas.iterator();
 		while (it.hasNext()){
 			Busqueda b=it.next();
@@ -36,7 +37,7 @@ public class AdministradorDeBusquedas {
 		return null;
 	}
 	
-	public void agregarBusqueda(String x, List<PuntoDeInteres> lista){
+	public void agregarBusqueda(String[] x, List<PuntoDeInteres> lista){
 		int[] ints=new int[0];
 		Iterator<PuntoDeInteres> i=lista.iterator();
 		

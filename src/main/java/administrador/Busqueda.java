@@ -9,11 +9,11 @@ import tpanual.utilitarios.Constantes;
 
 public class Busqueda {
 	private DateTime fechaDeBusqueda;
-	private String stringBuscado;
+	private String[] stringsBuscados;
 	private int[] idsEncontrados;
 	
-	public Busqueda(String stringBuscado, int[] idsEncontrados){
-		this.stringBuscado=stringBuscado;
+	public Busqueda(String[] stringsBuscados, int[] idsEncontrados){
+		this.stringsBuscados=stringsBuscados;
 		this.idsEncontrados=idsEncontrados;
 		this.fechaDeBusqueda=new DateTime();
 	}
@@ -21,15 +21,20 @@ public class Busqueda {
 	public DateTime getFechaDeBusqueda() {
 		return fechaDeBusqueda;
 	}
-	public String getStringBuscado() {
-		return stringBuscado;
+	public String[] getStringsBuscados() {
+		return stringsBuscados;
 	}
 	public int[] getIdsEncontrados() {
 		return idsEncontrados;
 	}
 	
-	public boolean coincideBusqueda(String x){
-		return x.indexOf(stringBuscado)!=1 && Busqueda.fechaValida(fechaDeBusqueda);
+	public boolean coincideBusqueda(String[] x){
+		if (x.length==0) return false;
+		boolean coincidencia=true;
+		for (int i=0;i<x.length;i++){
+			coincidencia=coincidencia && (x[i]==null && stringsBuscados[i]==null || (x[i]!=null && (x[i].indexOf(stringsBuscados[i]))!=1));
+		}
+		return coincidencia && Busqueda.fechaValida(fechaDeBusqueda);
 	}
 
 	public static boolean fechaValida(DateTime fecha){

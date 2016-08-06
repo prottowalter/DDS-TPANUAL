@@ -25,19 +25,19 @@ public class AdministradorDePoi {
 	}
 	
 	public List<PuntoDeInteres> busquedaDePuntosDeInteres(String x, boolean test){
-		Busqueda busqueda=AdministradorDeBusquedas.getInstance().getBusquedaAnterior(x);
+		String listaStrings[] = {x};
+		Busqueda busqueda=AdministradorDeBusquedas.getInstance().getBusquedaAnterior(listaStrings);
 		List<PuntoDeInteres> lista;
 		if (busqueda!=null){
 			try{
 				this.devolverPoiPorIds(busqueda.getIdsEncontrados());
 			}catch(PuntoDeInteresNoEncontradoException e){
-				lista= buscarEfectivamente(x);
-				AdministradorDeBusquedas.getInstance().agregarBusqueda(x, lista);
-				return lista;
+				//Se invalida la busqueda anterior y se procede a buscar normalmente
 			}
 		}
-		lista=buscarEfectivamente(x, test);
-		AdministradorDeBusquedas.getInstance().agregarBusqueda(x, lista);
+		lista=Mapa.getInstance().buscarPuntosDeInteresEnMemoria(x);
+		lista.addAll(Mapa.getInstance().buscarEnFuentesExternas(x, test));
+		AdministradorDeBusquedas.getInstance().agregarBusqueda(listaStrings, lista);
 		return lista;
 	}
 	
@@ -52,17 +52,24 @@ public class AdministradorDePoi {
 		}
 		return lista;
 	}
+
 	
-	private List<PuntoDeInteres> buscarEfectivamente(String x, boolean test){
-		return Mapa.getInstance().buscarPuntosDeInteres(x, test);
-	}
-	
-	private List<PuntoDeInteres> buscarEfectivamente(String x){
-		return Mapa.getInstance().buscarPuntosDeInteres(x, false);
-	}
-	
-	public List<PuntoDeInteres> buscarBancos(String banco, String servicio){
-		
+	public List<PuntoDeInteres> buscarBancos(String banco, String servicio, boolean test){
+		String listaStrings[] = {banco, servicio};
+		Busqueda busqueda=AdministradorDeBusquedas.getInstance().getBusquedaAnterior(listaStrings);
+		List<PuntoDeInteres> lista;
+		if (busqueda!=null){
+			try{
+				this.devolverPoiPorIds(busqueda.getIdsEncontrados());
+			}catch(PuntoDeInteresNoEncontradoException e){
+				//Se invalida la busqueda anterior y se procede a buscar normalmente
+			}
+		}
+		lista=Mapa.getInstance().buscarPuntosDeInteresEnMemoria(banco);
+		lista.addAll(Mapa.getInstance().buscarPuntosDeInteresEnMemoria(servicio));
+		lista.addAll(Mapa.getInstance().buscarBancos(banco, servicio));
+		AdministradorDeBusquedas.getInstance().agregarBusqueda(listaStrings, lista);
+		return lista;
 	}
 	
 }

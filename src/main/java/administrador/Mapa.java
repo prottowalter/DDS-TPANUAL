@@ -9,7 +9,7 @@ import java.util.Map;
 import administrador.adaptadores.AdaptadorServicioExterno;
 import administrador.adaptadores.AdaptadorServicioExternoBancos;
 import administrador.adaptadores.AdaptadorServicioExternoCGP;
-
+import tpanual.factory.InterfacesExternasFactory;
 import tpanual.main.Dias;
 import tpanual.main.poi.PuntoDeInteres;
 
@@ -29,7 +29,6 @@ public class Mapa {
 	private Mapa() {
 		puntos=new HashMap<Integer, PuntoDeInteres>();
 		adaptadores=new ArrayList<AdaptadorServicioExterno>();
-		adaptadores.add(new AdaptadorServicioExternoBancos());
 		adaptadores.add(new AdaptadorServicioExternoCGP());
 	}
 	
@@ -50,21 +49,16 @@ public class Mapa {
 	 * @param x: String a buscar
 	 * @test: false para buscar en servicios externos, true para buscar en mock
 	 */
-	List<PuntoDeInteres> buscarPuntosDeInteres(String x, boolean test){
+	List<PuntoDeInteres> buscarPuntosDeInteresEnMemoria(String x){
 		List<PuntoDeInteres> listaADevolver=new ArrayList<PuntoDeInteres>();
 		Iterator<PuntoDeInteres> it=puntos.values().iterator();
 		while (it.hasNext()){
 			PuntoDeInteres punto=it.next();
 			if (punto.buscarCoincidencia(x)) listaADevolver.add(punto);
 		}
-		List<PuntoDeInteres> listaExterna=buscarEnFuentesExternas(x, test);
-		agregarAMemoria(listaExterna);
-		listaADevolver.addAll(listaExterna);
 		return listaADevolver;
 	}
-	List<PuntoDeInteres> buscarPuntosDeInteres(String x){
-		return buscarPuntosDeInteres(x, false);
-	}
+	
 	
 	/**
 	 * Obtiene un PuntoDeInteres accediendo solo por id sin buscar
@@ -82,7 +76,7 @@ public class Mapa {
 	 * @return
 	 */
 	
-	private List<PuntoDeInteres> buscarEnFuentesExternas(String x, boolean test){
+	List<PuntoDeInteres> buscarEnFuentesExternas(String x, boolean test){
 		Iterator<AdaptadorServicioExterno> i=adaptadores.iterator();
 		List<PuntoDeInteres> lista=new ArrayList<PuntoDeInteres>();
 		while (i.hasNext()){
@@ -95,6 +89,7 @@ public class Mapa {
 				//llamar al mock
 			}
 		}
+		agregarAMemoria(lista);
 		return lista;
 	}
 	
@@ -104,9 +99,20 @@ public class Mapa {
 	 */
 	
 	private void agregarAMemoria(List<PuntoDeInteres> lista){
-		Iterator<PuntoDeInteres> i=lista.iterator();
-		while (i.hasNext()){
-			agregarPunto(i.next());
+		if (lista!=null){
+			Iterator<PuntoDeInteres> i=lista.iterator();
+			while (i.hasNext()){
+				agregarPunto(i.next());
+			}
 		}
 	}
+	
+	List<PuntoDeInteres> buscarBancos(String banco, String servicio){
+		AdaptadorServicioExternoBancos adaptador=new AdaptadorServicioExternoBancos();
+		List<PuntoDeInteres> l= adaptador.buscar(banco, servicio);
+		agregarAMemoria(l);
+		return l;
+	}
+	
+	
 }
