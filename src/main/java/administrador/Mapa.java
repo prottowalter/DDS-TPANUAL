@@ -12,6 +12,7 @@ import administrador.adaptadores.AdaptadorServicioExternoCGP;
 import tpanual.factory.InterfacesExternasFactory;
 import tpanual.main.Dias;
 import tpanual.main.poi.PuntoDeInteres;
+import tpanual.utilitarios.Utilitarios;
 
 public class Mapa {
 	
@@ -85,7 +86,7 @@ public class Mapa {
 			if (!test){
 				List<PuntoDeInteres> ll=adaptador.buscar(x);
 				if (ll!=null)
-					lista.addAll(ll);
+					lista=Utilitarios.fusionarListasSinRepetidos(lista, ll);
 			}else{
 				//llamar al mock
 			}

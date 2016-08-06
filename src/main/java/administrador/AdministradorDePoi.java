@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tpanual.main.poi.PuntoDeInteres;
+import tpanual.utilitarios.Utilitarios;
 
 /**
  * 
@@ -50,7 +51,8 @@ public class AdministradorDePoi {
 			usoBufferBusqueda=false;
 		}
 		lista=Mapa.getInstance().buscarPuntosDeInteresEnMemoria(x);
-		lista.addAll(Mapa.getInstance().buscarEnFuentesExternas(x, test));
+		
+		lista=Utilitarios.fusionarListasSinRepetidos(lista, Mapa.getInstance().buscarEnFuentesExternas(x, test));
 		AdministradorDeBusquedas.getInstance().agregarBusqueda(listaStrings, lista);
 		return lista;
 	}
@@ -86,8 +88,8 @@ public class AdministradorDePoi {
 			usoBufferBusqueda=false;
 		}
 		lista=Mapa.getInstance().buscarPuntosDeInteresEnMemoria(banco);
-		lista.addAll(Mapa.getInstance().buscarPuntosDeInteresEnMemoria(servicio));
-		lista.addAll(Mapa.getInstance().buscarBancos(banco, servicio));
+		lista=Utilitarios.fusionarListasSinRepetidos(lista, Mapa.getInstance().buscarPuntosDeInteresEnMemoria(servicio));
+		lista=Utilitarios.fusionarListasSinRepetidos(lista, Mapa.getInstance().buscarBancos(banco, servicio));
 		AdministradorDeBusquedas.getInstance().agregarBusqueda(listaStrings, lista);
 		return lista;
 	}
