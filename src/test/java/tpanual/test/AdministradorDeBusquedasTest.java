@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import administrador.AdministradorDeBusquedas;
 import administrador.AdministradorDePoi;
 import tpanual.factory.PuntoDeInteresFactory;
 import tpanual.main.Direccion;
@@ -18,23 +19,35 @@ public class AdministradorDeBusquedasTest {
 
 	@Test
 	public void administradorDeBusquedasDeBancoTest() {
-		// TODO Auto-generated constructor stub
+
 		
-		//AdministradorDeBusquedas busqueda = AdministradorDeBusquedas.getInstance();
-		AdministradorDePoi punto = new AdministradorDePoi();
+		AdministradorDePoi administradorDePoi = new AdministradorDePoi();
 				
 		//Creo la dirección
 		Direccion direccionDeLaSucursal= new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Av. Triunvirato").numero("5201").crearDireccion();
 		ArrayList<String> palabrasClave = new ArrayList<String>();
 		palabrasClave.add("Nunca tiene plata");
-		List<Servicio> servicios=Servicio.getListaServicios("Depositos", "Extracciones");
+		List<Servicio> servicios=Servicio.getListaServicios("Depositos");
 			
-		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getSucursal(-34.573001D, -58.490937D, "Banco Frances", direccionDeLaSucursal, palabrasClave, servicios);
+		PuntoDeInteres punto = PuntoDeInteresFactory.getSucursal(-34.573001D, -58.490937D, "Banco Frances", direccionDeLaSucursal, palabrasClave, servicios);
 						
-		punto.agregarPoi(puntoFactory);
-			
-		List<PuntoDeInteres> listaResultado = punto.busquedaDePuntosDeInteres("Banco Frances");
+		administradorDePoi.agregarPoi(punto);
+		
+		/**
+		 * Agrego manualmente al buffer de busquedas. Asi el sistema cree que esta busqueda se realizo y no requiere ir a servicios externos
+		 */
+		String[] l={"Banco Frances", "Depositos"};
+		List<PuntoDeInteres> lista=new ArrayList<PuntoDeInteres>();
+		lista.add(punto);
+		AdministradorDeBusquedas.getInstance().agregarBusqueda(l, lista);	
+		
+		List<PuntoDeInteres> listaResultado = administradorDePoi.buscarBancos("Banco Frances", "Depositos");
 						
+		/**
+		 * Compruebo que no haya buscado en servicios externos
+		 */
+		assertTrue(administradorDePoi.usoBufferBusqueda());
+		
 		assertTrue( listaResultado.size() > 0);
 		assertFalse( listaResultado.size() == 0);
 		
@@ -43,10 +56,8 @@ public class AdministradorDeBusquedasTest {
 	
 	@Test
 	public void administradorDeBusquedasDeCgpTest() {
-		// TODO Auto-generated constructor stub
-		
-		//AdministradorDeBusquedas busqueda = AdministradorDeBusquedas.getInstance();
-		AdministradorDePoi punto = new AdministradorDePoi();
+
+		AdministradorDePoi admin = new AdministradorDePoi();
 				
 		//Creo la dirección
 		Direccion direccionCGP = new Direccion.DireccionBuilder().barrio("Villa Urquiza").callePrincipal("Miller").numero("2751").crearDireccion();
@@ -54,12 +65,25 @@ public class AdministradorDeBusquedasTest {
 		palabrasClave.add("CGP");
 		List<Servicio> servicios=Servicio.getListaServicios("Registro Civil");
 			
-		PuntoDeInteres puntoFactory = PuntoDeInteresFactory.getCGP(-34.568574D, -58.482842D, "CGP 12", direccionCGP, palabrasClave, servicios, 12);
+		PuntoDeInteres punto = PuntoDeInteresFactory.getCGP(-34.568574D, -58.482842D, "CGP 12", direccionCGP, palabrasClave, servicios, 12);
 					
-		punto.agregarPoi(puntoFactory);
+		admin.agregarPoi(punto);
 				
-		List<PuntoDeInteres> listaResultado = punto.busquedaDePuntosDeInteres("");			
-				
+		/**
+		 * Agrego manualmente al buffer de busquedas. Asi el sistema cree que esta busqueda se realizo y no requiere ir a servicios externos
+		 */
+		String[] l={"Registro Civil"};
+		List<PuntoDeInteres> lista=new ArrayList<PuntoDeInteres>();
+		lista.add(punto);
+		AdministradorDeBusquedas.getInstance().agregarBusqueda(l, lista);	
+		
+		List<PuntoDeInteres> listaResultado = admin.busquedaDePuntosDeInteres("Registro Civil");
+						
+		/**
+		 * Compruebo que no haya buscado en servicios externos
+		 */
+		assertTrue(admin.usoBufferBusqueda());
+		
 		assertTrue( listaResultado.size() > 0);
 		assertFalse( listaResultado.size() == 0);	
 	}

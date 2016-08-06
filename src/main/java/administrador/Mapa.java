@@ -73,6 +73,7 @@ public class Mapa {
 	/**
 	 * Busca en las todas las fuentes de POI externas consultando la lista de adaptadores de fuentes externas.
 	 * @param x
+	 * @test: si es true busca en el Mock
 	 * @return
 	 */
 	

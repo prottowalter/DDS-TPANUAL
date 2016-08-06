@@ -166,10 +166,10 @@ public class ComunicacionServiciosExternos implements
 	private PuntoDeInteres GenerarPoiBancoAPartirDeDatosExternos(
 			JsonObject unPoiJsonObject) {
 		
-		SucursalBanco tipoPoi = new SucursalBanco();
 
 		List<Servicio> servicios = GetServiciosBanco(unPoiJsonObject.get("servicios").getAsJsonArray());
-		tipoPoi.setServicios(servicios);
+		SucursalBanco tipoPoi = new SucursalBanco(servicios);
+		
 		PuntoDeInteres poi = 
 				new PuntoDeInteres(
 						0,

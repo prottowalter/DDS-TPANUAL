@@ -43,7 +43,7 @@ public class AdministradorDeBusquedas {
 		
 		while (i.hasNext()){
 			PuntoDeInteres poi=i.next();
-			agregarElemento(ints, poi.getId());
+			ints=agregarElemento(ints, poi.getId());
 		}
 		Busqueda b=new Busqueda(x, ints);
 		busquedas.add(b);

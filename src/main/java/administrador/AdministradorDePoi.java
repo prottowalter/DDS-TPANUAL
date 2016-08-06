@@ -5,7 +5,18 @@ import java.util.List;
 
 import tpanual.main.poi.PuntoDeInteres;
 
+/**
+ * 
+ * @author dipatata
+ *@usoBufferBusqueda: Nos dice si la ultima busqueda realizada utilizo el buffer de busquedas o realizo efectivamente la busqueda
+ *
+ */
+
 public class AdministradorDePoi {
+
+	
+	private boolean usoBufferBusqueda;
+	
 	public boolean modificarPoi(PuntoDeInteres poi){
 		PuntoDeInteres aModificar=Mapa.getInstance().obtenerPuntoDeInteres(poi.getId());
 		if (aModificar!=null)
@@ -29,11 +40,14 @@ public class AdministradorDePoi {
 		Busqueda busqueda=AdministradorDeBusquedas.getInstance().getBusquedaAnterior(listaStrings);
 		List<PuntoDeInteres> lista;
 		if (busqueda!=null){
+			usoBufferBusqueda=true;
 			try{
 				this.devolverPoiPorIds(busqueda.getIdsEncontrados());
 			}catch(PuntoDeInteresNoEncontradoException e){
 				//Se invalida la busqueda anterior y se procede a buscar normalmente
 			}
+		}else{
+			usoBufferBusqueda=false;
 		}
 		lista=Mapa.getInstance().buscarPuntosDeInteresEnMemoria(x);
 		lista.addAll(Mapa.getInstance().buscarEnFuentesExternas(x, test));
@@ -53,23 +67,33 @@ public class AdministradorDePoi {
 		return lista;
 	}
 
+	public List<PuntoDeInteres> buscarBancos(String banco, String servicio ){
+		return buscarBancos(banco, servicio, false);
+	}
 	
 	public List<PuntoDeInteres> buscarBancos(String banco, String servicio, boolean test){
 		String listaStrings[] = {banco, servicio};
 		Busqueda busqueda=AdministradorDeBusquedas.getInstance().getBusquedaAnterior(listaStrings);
 		List<PuntoDeInteres> lista;
 		if (busqueda!=null){
+			usoBufferBusqueda=true;
 			try{
-				this.devolverPoiPorIds(busqueda.getIdsEncontrados());
+				return this.devolverPoiPorIds(busqueda.getIdsEncontrados());
 			}catch(PuntoDeInteresNoEncontradoException e){
 				//Se invalida la busqueda anterior y se procede a buscar normalmente
 			}
+		}else{
+			usoBufferBusqueda=false;
 		}
 		lista=Mapa.getInstance().buscarPuntosDeInteresEnMemoria(banco);
 		lista.addAll(Mapa.getInstance().buscarPuntosDeInteresEnMemoria(servicio));
 		lista.addAll(Mapa.getInstance().buscarBancos(banco, servicio));
 		AdministradorDeBusquedas.getInstance().agregarBusqueda(listaStrings, lista);
 		return lista;
+	}
+
+	public boolean usoBufferBusqueda() {
+		return usoBufferBusqueda;
 	}
 	
 }

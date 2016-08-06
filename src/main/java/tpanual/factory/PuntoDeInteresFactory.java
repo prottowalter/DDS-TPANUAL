@@ -27,7 +27,7 @@ public class PuntoDeInteresFactory {
 		return punto;
 	}
 	public static PuntoDeInteres getSucursal(double latitud, double longitud, String nombre, Direccion direccion, List<String> palabrasClave, List<Servicio> servicios){
-		SucursalBanco sucursal=new SucursalBanco();
+		SucursalBanco sucursal=new SucursalBanco(servicios);
 		PuntoDeInteres punto=new PuntoDeInteres(latitud, longitud, nombre, direccion, palabrasClave, sucursal);
 		return punto;
 	}	

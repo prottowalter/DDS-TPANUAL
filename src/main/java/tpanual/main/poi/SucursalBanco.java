@@ -14,16 +14,14 @@ public class SucursalBanco extends TipoPuntoInteres {
 	List<Servicio> servicios;
 	HorarioDeAtencion horario = new HorarioDeAtencion();
 
-	public SucursalBanco() {
+	public SucursalBanco(List<Servicio> lista) {
+		servicios=lista;
 		for (Dias dia : Dias.values()) { // Agrega el horario de atencion lunes a viernes de 10:00 a 15:00
 			if (dia != Dias.DOMINGO && dia != Dias.SABADO)
 				horario.addRangoDia(1000, 1500, dia);
 		}
 	}
 	
-	public void setServicios(List<Servicio> paramServicios){
-		servicios = paramServicios;
-	}
 
 	@Override
 	public int getRadioCercania() {

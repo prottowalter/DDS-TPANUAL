@@ -29,7 +29,7 @@ public class Busqueda {
 	}
 	
 	public boolean coincideBusqueda(String[] x){
-		if (x.length==0) return false;
+		if (x.length==0 || x.length!=stringsBuscados.length) return false;
 		boolean coincidencia=true;
 		for (int i=0;i<x.length;i++){
 			coincidencia=coincidencia && (x[i]==null && stringsBuscados[i]==null || (x[i]!=null && (x[i].indexOf(stringsBuscados[i]))!=1));
@@ -40,6 +40,6 @@ public class Busqueda {
 	public static boolean fechaValida(DateTime fecha){
 		DateTime horaActual=new DateTime();
 		Duration duracion=new Duration(fecha, horaActual);
-		return duracion.getStandardHours()>Constantes.INTERVALO_DEHORAS_CONSIDERA_BUSQUEDA_RECIENTE;
+		return duracion.getStandardHours()<Constantes.INTERVALO_DEHORAS_CONSIDERA_BUSQUEDA_RECIENTE;
 	}	
 }
