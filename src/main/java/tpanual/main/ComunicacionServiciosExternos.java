@@ -22,7 +22,7 @@ import tpanual.main.poi.SucursalBanco;
 public class ComunicacionServiciosExternos implements
 		IComunicacionServiciosExternos {
 
-	@Override
+
 	public List<PuntoDeInteres> obtenerCGPEnCalleOZona(String calleOZona) {
 		try {
 			Client client = Client.create();
@@ -132,7 +132,7 @@ public class ComunicacionServiciosExternos implements
 		return nuevoHorario;
 	}
 
-	@Override
+
 	public List<PuntoDeInteres> obtenerBancosPorNombreYServicio(
 			String nombreBanco, String nombreServicioOfrecido) {
 		try{
